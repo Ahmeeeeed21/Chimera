@@ -1,0 +1,308 @@
+{% extends 'basefront.html.twig' %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from flatable.phoenixcoded.net/default/user-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 10 Jan 2019 11:43:04 GMT -->
+<head>
+<title>Profil</title>
+
+
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="description" content="Phoenixcoded">
+<meta name="keywords" content=", Flat ui, Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
+<meta name="author" content="Phoenixcoded">
+
+<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{{ asset('../bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('../bower_components/font-awesome/css/font-awesome.min.css')}}">
+
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/pages/advance-elements/css/bootstrap-datetimepicker.css')}}">
+
+<link rel="stylesheet" type="text/css" href="{{ asset('../bower_components/bootstrap-daterangepicker/daterangepicker.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('../bower_components/datedropper/datedropper.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('../bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}">
+
+
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/icon/themify-icons/themify-icons.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/icon/icofont/css/icofont.css')}}">
+
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/pages/flag-icon/flag-icon.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/pages/menu-search/css/component.css')}}">
+
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/color/color-1.css')}}" id="color" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/linearicons.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/simple-line-icons.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/ionicons.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery.mCustomScrollbar.css')}}">
+</head>
+<body>
+<br>
+<br>
+<h4><center>Mon Profil</center></h4>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="pcoded-content">
+<div class="pcoded-inner-content">
+
+<div class="main-body user-profile">
+<div class="page-wrapper">
+
+<div class="page-header">
+<div class="page-header-title">
+
+</div>
+<div class="page-header-breadcrumb">
+
+</div>
+</div>
+
+
+<div class="page-body">
+
+<div class="row">
+<div class="col-lg-12">
+<div class="cover-profile">
+<div class="profile-bg-img">
+
+<div class="card-block user-info">
+<div class="col-md-12">
+<div class="media-left">
+<a href="#" class="profile-image">
+
+<img class="user-img img-circle" src="{{ asset('/uploads/'~session.all.Utilisateur.photo )}}" alt="user-img">
+</a>
+</div>
+<div class="media-body row">
+<div class="col-lg-12">
+<div class="user-title">
+<h2>{{ session.all.Utilisateur.Nom}} {{ session.all.Utilisateur.prenom}}</h2>
+<span class="text-white">{{ session.all.Utilisateur.Domaine}}</span>
+</div>
+</div>
+<div>
+<div class="pull-right cover-btn">
+<button type="button" class="btn btn-primary m-r-10"><i class="icofont icofont-plus"></i> Changer Photo</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-lg-12">
+
+
+
+<div class="tab-content">
+
+<div class="tab-pane active" id="personal" role="tabpanel">
+
+<div class="card">
+<div class="card-header">
+<h5 class="card-header-text">Mes Informations</h5>
+<button id="edit-btn" type="button" class="btn btn-sm btn-primary waves-effect waves-light f-right">
+<i class="icofont icofont-edit"></i>
+</button>
+</div>
+<div class="card-block">
+<div class="view-info">
+<div class="row">
+<div class="col-lg-12">
+<div class="general-info">
+<div class="row">
+<div class="col-lg-12 col-xl-6">
+<table class="table m-0">
+<tbody>
+<tr>
+<th scope="row">Nom</th>
+<td>{{ session.all.Utilisateur.Nom}}</td>
+</tr>
+<tr>
+<th scope="row">Genre</th>
+<td>{{ session.all.Utilisateur.Genre}}</td>
+</tr>
+<tr>
+<th scope="row">Date de naissance</th>
+<td>{{ session.all.Utilisateur.bday|date("m/d/y")}}</td> 
+</tr>
+
+
+</tbody>
+</table>
+</div>
+
+<div class="col-lg-12 col-xl-6">
+<table class="table">
+<tbody>
+<tr>
+<th scope="row">Prenom</th>
+<td>{{ session.all.Utilisateur.Prenom}}</td>
+</tr>
+<tr>
+<th scope="row">Email</th>
+<td>{{ session.all.Utilisateur.Email}}</td>
+</tr>
+<tr>
+<th scope="row">Domaine</th>
+<td>{{ session.all.Utilisateur.Domaine}}</td>
+</tr>
+
+
+
+
+</tbody>
+</table>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="edit-info">
+   <div class="row">
+     <div class="col-lg-12">
+         <div class="general-info">
+             <div class="row">
+                 <div class="col-lg-6">
+                 {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+                     <table class="table">
+                         <tbody>
+                             <tr>
+                                 <td>
+                                     <div class="input-group">
+                                         <span class="input-group-addon"><i class="icofont icofont-user"></i></span>
+                                         
+                                         {{ form_errors(form.nom) }}
+                                         {{ form_widget(form.nom,{'attr': {'class': 'form-control' , 'placeholder' : 'Nom'}}) }} 
+                                     </div>
+                                 </td>
+                             </tr>
+                             <tr>
+<td>
+{{ form_errors(form.genre) }}
+                                         {{ form_widget(form.genre,{'attr': {'class': 'form-control' , 'placeholder' : 'Genre'}}) }}
+                    
+</td>
+                                </tr>
+                                    <tr>
+<td>
+<div class="input-group">
+<span class="input-group-addon"><i class="icofont icofont-birthday-cake"></i></span>
+{{ form_errors(form.bday) }}
+                                         {{ form_widget(form.bday,{'attr': {'class': 'form-control' , 'placeholder' : 'Date de naissance'}}) }}
+</div>
+</td>
+</tr>
+                                    <tr>
+
+</tbody>
+</table>
+</div>
+
+<div class="col-lg-6">
+                <table class="table">
+                            <tbody>
+                        <tr>
+                    <td>
+            <div class="input-group">
+                    <span class="input-group-addon"><i class="icofont icofont-user "></i></span>
+        {{ form_errors(form.prenom) }}
+                                         {{ form_widget(form.prenom,{'attr': {'class': 'form-control' , 'placeholder' : 'Prenom'}}) }}
+            </div>
+            </td>
+            <tr>
+            <td>
+            <div class="input-group">
+                    <span class="input-group-addon"><i class="icofont icofont-email"></i></span>
+                    {{ form_errors(form.email) }}
+                                         {{ form_widget(form.email,{'attr': {'class': 'form-control' , 'placeholder' : 'Email'}}) }}
+            </div>
+            
+            </td>
+            </tr>
+
+            </tr>
+            <td>
+                    <div class="input-group">
+                <span class="input-group-addon"><i class="icofont icofont- "></i></span>
+                    {{ form_errors(form.domaine) }}
+                                         {{ form_widget(form.domaine,{'attr': {'class': 'form-control' , 'placeholder' : 'Domaine'}}) }}
+                    </div>
+                </td>
+                </tr>
+
+
+
+                </tbody>
+                </table>
+</div>
+
+</div>
+
+<div class="text-center">
+
+{{ form_widget(form.Modifier,{'attr': {'class': 'btn btn-primary waves-effect waves-light m-r-20', 'placeholder' : 'Modifier'}}) }}
+<a href="#!" id="edit-cancel" class="btn btn-default waves-effect">Annuler</a>
+</div>
+{{ form_end(form) }}
+</div>
+</div>
+</div>
+</div>
+</div>
+</div> 
+{% endblock %}
+{% block js %}
+    <script data-cfasync="false" src="{{ asset('../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('../bower_components/jquery/dist/jquery.min.js')}}" ></script>
+    <script src="{{ asset('../bower_components/jquery-ui/jquery-ui.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('../bower_components/tether/dist/js/tether.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('../bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('../bower_components/jquery-slimscroll/jquery.slimscroll.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('assets/pages/advance-elements/moment-with-locales.min.js')}}"></script>
+    <script type="text/javascript"  src="{{ asset('assets/pages/advance-elements/moment-with-locales.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('../bower_components/datedropper/datedropper.min.js')}}"></script>
+    <script type="text/javascript"  src="{{ asset('../bower_components/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('assets/pages/advance-elements/bootstrap-datetimepicker.min.js')}}"></script>
+    <script type="text/javascript"  src="{{ asset('../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('../bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+    <script type="text/javascript"  src="{{ asset('../bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('../bower_components/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+    <script type="text/javascript"  src="{{ asset('../bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('../bower_components/ckeditor/ckeditor.js')}}"></script>
+    <script type="text/javascript"  src="{{ asset('assets/pages/chart/echarts/js/echarts-all.js')}}"></script>
+    
+    <script src="{{ asset('assets/pages/user-profile.js')}}"></script>
+    </body>
+</html>
+{% endblock %}
+
+

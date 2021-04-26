@@ -1,5 +1,4 @@
-{% extends 'basefront.html.twig' %}
-
+{% extends 'base.html.twig' %}
 {% block body %}
 <!DOCTYPE html>
 <html lang="en">
@@ -52,84 +51,220 @@
     <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
 </head>
 <body>
-<section id="main-content">
-      <section class="wrapper">
-        <!-- BASIC FORM ELELEMNTS -->
-        <div class="row mt">
-          <div class="col-lg-6 col-md-6 col-sm-6">
-    <div class="send-message">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="section-heading">
-              <h2>Modifier Mon profile</h2>
-              <img src="{{ asset('/uploads/'~session.all.Utilisateur.photo )}}" alt="User-Profile-Image">
-            </div>
-          </div>
-          <div class="col-md-8">
-            <div class="contact-form">
-              <form id="contact" action="" method="post">
-              {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
-              
-                <div class="row">
-                 
-                  <div class="col-lg-12 col-md-12 col-sm-12">
-                    <fieldset>
-                     {{ form_errors(form.nom) }}
-                     {{ form_widget(form.nom,{'attr': {'class': 'form-control' , 'placeholder' : 'Nom'}}) }}
-                    </fieldset>
-                  </div>
-                  <div class="col-lg-12 col-md-12 col-sm-12">
-                    <fieldset>
-                    {{ form_errors(form.prenom) }}
-                     {{ form_widget(form.prenom,{'attr': {'class': 'form-control' , 'placeholder' : 'Prenom'}}) }}
-                    </fieldset>
-                  </div>
-                  <div class="col-lg-12 col-md-12 col-sm-12">
-                    <fieldset>
-                    {{ form_errors(form.bday) }}
-                     {{ form_widget(form.bday,{'attr': {'class': 'form-control' , 'placeholder' : 'Date de naissance'}}) }}
-                    </fieldset>
-                  </div>
-                  <div class="col-lg-12 col-md-12 col-sm-12">
-                    <fieldset>
-                    {{ form_errors(form.genre) }}
-                     {{ form_widget(form.genre,{'attr': {'class': 'form-control' , 'placeholder' : 'genre'}}) }}
-                    </fieldset>
-                  </div>
-                  
-                  <div class="col-lg-12 col-md-12 col-sm-12">
-                    <fieldset>
-                    {{ form_errors(form.email) }}
-                     {{ form_widget(form.email,{'attr': {'class': 'form-control' , 'placeholder' : 'Email'}}) }}
-                    </fieldset>
-                  </div>
-                  <div class="col-lg-12 col-md-12 col-sm-12">
-                    <fieldset>
-                    {{ form_errors(form.domaine) }}
-                     {{ form_widget(form.domaine,{'attr': {'class': 'form-control' , 'placeholder' : 'Domaine'}}) }}
-                    </fieldset>
-                  </div>
-                  
-                               <br></br>
-                  <div class="row row-space">
-                      <div class="col-2">
-                        <div class="input-group">
-                        <br></br>
-                        {{ form_widget(form.Modifier,{'attr': {'class': 'btn btn-danger ', 'placeholder' : 'Modifier'}}) }}
+<br>
+<br>
+<h4><center>Mon Profil</center></h4>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="pcoded-content">
+<div class="pcoded-inner-content">
 
-                        </div>
-                         </div>
-                         
-                </div>
-              </form>
-              {{ form_end(form) }}
-            </div>
-          </div>
-          </div>
+<div class="main-body user-profile">
+<div class="page-wrapper">
+
+<div class="page-header">
+<div class="page-header-title">
+
 </div>
-</section>
-</body>
+<div class="page-header-breadcrumb">
+
+</div>
+</div>
+
+
+<div class="page-body">
+
+<div class="row">
+<div class="col-lg-12">
+<div class="cover-profile">
+<div class="profile-bg-img">
+
+<div class="card-block user-info">
+<div class="col-md-12">
+<div class="media-left">
+<a href="#" class="profile-image">
+
+<img class="user-img img-circle" src="{{ asset('/uploads/'~session.all.Utilisateur.photo )}}" alt="user-img">
+</a>
+</div>
+<div class="media-body row">
+<div class="col-lg-12">
+<div class="user-title">
+<h2>{{ session.all.Utilisateur.Nom}} {{ session.all.Utilisateur.prenom}}</h2>
+<span class="text-white">{{ session.all.Utilisateur.Domaine}}</span>
+</div>
+</div>
+<div>
+<div class="pull-right cover-btn">
+<a href="{{path('changeph',{'id':  session.all.Utilisateur.id })}}" class="btn btn-primary m-r-10" ><i class="icofont icofont-plus"></i> Changer Photo</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-lg-12">
+
+
+
+<div class="tab-content">
+
+<div class="tab-pane active" id="personal" role="tabpanel">
+
+<div class="card">
+<div class="card-header">
+<h5 class="card-header-text">Mes Informations</h5>
+<button id="edit-btn" type="button" class="btn btn-sm btn-primary waves-effect waves-light f-right">
+<i class="icofont icofont-edit"></i>
+</button>
+</div>
+<div class="card-block">
+<div class="view-info">
+<div class="row">
+<div class="col-lg-12">
+<div class="general-info">
+<div class="row">
+<div class="col-lg-12 col-xl-6">
+<table class="table m-0">
+<tbody>
+<tr>
+<th scope="row">Nom</th>
+<td>{{ session.all.Utilisateur.Nom}}</td>
+</tr>
+<tr>
+<th scope="row">Genre</th>
+<td>{{ session.all.Utilisateur.Genre}}</td>
+</tr>
+<tr>
+<th scope="row">Date de naissance</th>
+<td>{{ session.all.Utilisateur.bday|date("m/d/y")}}</td>
+</tr>
+
+
+</tbody>
+</table>
+</div>
+
+<div class="col-lg-12 col-xl-6">
+<table class="table">
+<tbody>
+<tr>
+<th scope="row">Prenom</th>
+<td>{{ session.all.Utilisateur.Prenom}}</td>
+</tr>
+<tr>
+<th scope="row">Email</th>
+<td>{{ session.all.Utilisateur.Email}}</td>
+</tr>
+
+
+
+
+</tbody>
+</table>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="edit-info">
+   <div class="row">
+     <div class="col-lg-12">
+         <div class="general-info">
+             <div class="row">
+                 <div class="col-lg-6">
+                 {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+                     <table class="table">
+                         <tbody>
+                             <tr>
+                                 <td>
+                                     <div class="input-group">
+                                         <span class="input-group-addon"><i class="icofont icofont-user"></i></span>
+                                         
+                                         {{ form_errors(form.nom) }}
+                                         {{ form_widget(form.nom,{'attr': {'class': 'form-control' , 'placeholder' : 'Nom'}}) }} 
+                                     </div>
+                                 </td>
+                             </tr>
+                             <tr>
+<td>
+{{ form_errors(form.genre) }}
+                                         {{ form_widget(form.genre,{'attr': {'class': 'form-control' , 'placeholder' : 'Genre'}}) }}
+                    
+</td>
+                                </tr>
+                                    <tr>
+<td>
+<div class="input-group">
+<span class="input-group-addon"><i class="icofont icofont-birthday-cake"></i></span>
+{{ form_errors(form.bday) }}
+                                         {{ form_widget(form.bday,{'attr': {'class': 'form-control' , 'placeholder' : 'Date de naissance'}}) }}
+</div>
+</td>
+</tr>
+                                    <tr>
+
+</tbody>
+</table>
+</div>
+
+<div class="col-lg-6">
+                <table class="table">
+                            <tbody>
+                        <tr>
+                    <td>
+            <div class="input-group">
+                    <span class="input-group-addon"><i class="icofont icofont-user "></i></span>
+        {{ form_errors(form.prenom) }}
+                                         {{ form_widget(form.prenom,{'attr': {'class': 'form-control' , 'placeholder' : 'Prenom'}}) }}
+            </div>
+            </td>
+            <tr>
+            <td>
+            <div class="input-group">
+                    <span class="input-group-addon"><i class="icofont icofont-email"></i></span>
+                    {{ form_errors(form.email) }}
+                                         {{ form_widget(form.email,{'attr': {'class': 'form-control' , 'placeholder' : 'Email'}}) }}
+            </div>
+            
+            </td>
+            </tr>
+
+
+
+                </tbody>
+                </table>
+</div>
+
+</div>
+
+<div class="text-center">
+
+{{ form_widget(form.Modifier,{'attr': {'class': 'btn btn-primary waves-effect waves-light m-r-20', 'placeholder' : 'Modifier'}}) }}
+<a href="#!" id="edit-cancel" class="btn btn-default waves-effect">Annuler</a>
+</div>
+{{ form_end(form) }}
+</div>
+</div>
+</div>
+</div>
+</div>
+</div> 
 {% endblock %}
 {% block js %}
     <script data-cfasync="false" src="{{ asset('../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js')}}"></script>
@@ -156,3 +291,5 @@
     </body>
 </html>
 {% endblock %}
+
+

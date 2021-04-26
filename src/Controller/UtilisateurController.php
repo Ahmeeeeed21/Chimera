@@ -24,9 +24,11 @@ use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationRequestHandler
 
 
 class UtilisateurController extends AbstractController
+
 {
+
     /**
-     * @Route("/utilisateur", name="index")
+     * @Route("/admin", name="index")
      */
     public function index(SessionInterface $session): Response
     {
@@ -37,33 +39,25 @@ class UtilisateurController extends AbstractController
         ]);
     }
     /**
-     * @Route("/inscrit", name="inscrit")
+     * @Route("/utilisateur", name="indexfront")
      */
-    public function newUtilisateur(Request $request,\Swift_Mailer $mailer)
+    public function indexfront(SessionInterface $session): Response
     {
-        $Utilisateur=new Utilisateur();
-        $form=$this->createForm(UtilisateurType::Class,$Utilisateur);
-        $form->add('Inscrit', SubmitType::class);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()){
-        $Utilisateur = $form->getData();
-        $file=$Utilisateur->getPhoto();
-        $fileName=md5(uniqid()).'.'.$file->guessExtension();
-        $file->move($this->getParameter('upload_directory'), $fileName);
-        $Utilisateur->setPhoto($fileName);
-        $em=$this->getDoctrine()->getManager();
-        $em->persist($Utilisateur);
-        $em->flush();
-        $message = (new \Swift_Message('Utilisateur'))
-        ->setFrom('slowlife.testpi@gmail.com')
-        ->setTo($Utilisateur->getEmail())
-        ->setBody("Bienvenu Mme/Mr ".$Utilisateur->getNom()."à Slowlife By Chimera");
-            $mailer->send($message) ;
-
-        return $this->redirectToRoute('index');
-        }
-        return $this->render('utilisateur/inscription.html.twig', [
-            'form' => $form->createView(),
+        return $this->render('utilisateur/indexfront.html.twig', [
+            'controller_name' => 'UtilisateurController',
+            'session'=>$session,
+            
+        ]);
+    }
+    /**
+     * @Route("/email", name="email")
+     */
+    public function email(): Response
+    {
+        return $this->render('Emails/confirmer.html.twig', [
+            'controller_name' => 'UtilisateurController',
+            
+            
         ]);
     }
 
@@ -91,39 +85,7 @@ class UtilisateurController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/showUser/{id}", name="showUser")
-     */
-
-    public function showUser($id,SessionInterface $session): Response
-    {
-        $repository=$this->getDoctrine()->getRepository(Utilisateur::Class);
-        $Utilisateur=$repository->find($id);
-
-        return $this->render('utilisateur/showUser.html.twig', [
-            'Utilisateur' => $Utilisateur,
-            "session"=>$session,
-        ]);
-}
- /**
-     * @Route("/updateUser/{id}", name="updateUser")
-     */
-    public function updateUser(Request $request, $id,SessionInterface $session)
-    {
-        $em=$this->getDoctrine()->getManager();
-        $Utilisateur = $em->getRepository(Utilisateur::class)->find($id);
-        $form = $this->createForm(ModifType::class, $Utilisateur);
-        $form->add('Modifier',SubmitType::class);
-        $form->handleRequest($request);
-        if ($form->isSubmitted()) {
-            $em->flush();       
-            return $this->redirectToRoute('UtilisateurList');
-        }
-        return $this->render('utilisateur/updateUser.html.twig', [
-                        'form' => $form->createView(),
-                        "session"=>$session,
-        ]);
-    }
+ 
     /**
      * @Route("/deleteUser/{id}", name="deleteUser")
      */
@@ -176,18 +138,19 @@ class UtilisateurController extends AbstractController
      * @Route("/recherche", name="recherche")
 
      */
-    function Recherche(UtilisateurRepository $repository,Request $request){
+    function Recherche(UtilisateurRepository $repository,SessionInterface $session,Request $request){
         $data=$request->get('search');
         $Utilisateurs=$repository->findBy(['nom'=>$data]);
 
         return $this->render('utilisateur/List.html.twig', [
             'Utilisateurs' => $Utilisateurs,
+            "session"=>$session,
         ]);
     }
      /**
      * @Route("/Userbygenre", name="Statistiques")
      */
-    public function Statgenre()  
+    public function Statgenre(SessionInterface $session)  
     {
         $male=$this->getDoctrine()->getRepository(Utilisateur::Class)->findMale();
         $female=$this->getDoctrine()->getRepository(Utilisateur::Class)->findFemale();
@@ -195,13 +158,14 @@ class UtilisateurController extends AbstractController
         return $this->render('Utilisateur/stat.html.twig', [
             'Homme'=>$male,
             'Femme'=>$female,
+            "session"=>$session,
         ]);
     }
 
     /**
      * @Route("/Userbytype", name="Statistiquestype")
      */
-    public function Stattype()  
+    public function Stattype(SessionInterface $session)  
     {
         $coach=$this->getDoctrine()->getRepository(Utilisateur::Class)->findCoach();
         $client=$this->getDoctrine()->getRepository(Utilisateur::Class)->findClient();
@@ -209,6 +173,7 @@ class UtilisateurController extends AbstractController
         return $this->render('Utilisateur/stat.html.twig', [
             'Coach'=>$coach,
             'Client'=>$client,
+            "session"=>$session,
         ]);
     }
         
@@ -256,24 +221,7 @@ class UtilisateurController extends AbstractController
     }
 
 
-    /**
-     * @Route("/update/{id}", name="update")
-     */
-    public function update(Request $request, $id,SessionInterface $session)
-    {
-        $em=$this->getDoctrine()->getManager();
-        $Utilisateur = $em->getRepository(Utilisateur::class)->findBy(array('utilisateur'=>$session->get('utilisateur')->getId));
-        $form = $this->createForm(ModifType::class, $Utilisateur);
-        $form->add('Modifier',SubmitType::class);
-        $form->handleRequest($request);
-        if ($form->isSubmitted()) {
-            $em->flush();       
-            return $this->redirectToRoute('UtilisateurList');
-        }
-        return $this->render('utilisateur/updateUser.html.twig', [
-                        'form' => $form->createView(),
-        ]);
-    }
+  
 
     /**
      * @Route("/Usershow/", name="Usershow")
@@ -295,5 +243,6 @@ else{
     return $this->redirectToRoute('login');
 }
 }
+
 
 }

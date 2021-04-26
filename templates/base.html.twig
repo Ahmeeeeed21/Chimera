@@ -45,6 +45,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/simple-line-icons.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/ionicons.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery.mCustomScrollbar.css')}}">
+    <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
 </head>
 </html>
 
@@ -86,21 +87,23 @@
                                
                             </ul>
                             <ul class="nav-right">
+                            
+                            
                                 <li class="user-profile header-notification">
                                     <a href="#!">
-                                        <img src="{{ asset('assets/images/user.png')}}" alt="User-Profile-Image">
-                                        <span>John Doe</span>
+                                        <img src="{{ asset('/uploads/'~session.all.Utilisateur.photo )}}" alt="User-Profile-Image">
+                                        <span>{{ session.all.Utilisateur.Nom}} {{ session.all.Utilisateur.prenom}}</span>
                                         <i class="ti-angle-down"></i>
                                     </a>
                                     <ul class="show-notification profile-notification">
                                         <li>
-                                            <a href="update">
+                                            <a href="{{path('upd', {'id':  session.all.Utilisateur.id  }) }}">
                                                 <i class="ti-user"></i> Profile
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#">
-                                                <i class="ti-user"></i> Changer Mot de passe
+                                            <a href="{{path('change', {'id':  session.all.Utilisateur.id  }) }}">
+                                                <i class="ti-settings"></i> Changer Mot de passe
                                             </a>
                                         </li>
                                         
@@ -110,10 +113,7 @@
                                             </a>
                                         </li>
                                     </ul>                                   
-                                </li>
-
- 
-                                
+                                </li>   
                             </ul>
 
                             <div id="morphsearch" class="morphsearch">
@@ -616,6 +616,8 @@
     </div>
     <![endif]-->
 
+  </div>
+
 {% endblock %}
 <!--[if lt IE 9]>
 <div class="ie-warning">
@@ -699,9 +701,9 @@
     <script src="{{ asset('assets/js/demo-12.js')}}"></script>
     <script src="{{ asset('assets/js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
     <script src="{{ asset('assets/js/jquery.mousewheel.min.js')}}"></script>
-{% endblock %}
 
-    </div>
+{% endblock %}
 </body>
+  
 </html>
 

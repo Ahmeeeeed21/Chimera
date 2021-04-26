@@ -162,7 +162,6 @@ class Utilisateur implements UserInterface
     public function setAncien(string $ancien): self
     {
         $this->ancien = $ancien;
-
         return $this;
     }
     public function getType(): ?int

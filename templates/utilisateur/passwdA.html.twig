@@ -1,12 +1,11 @@
-{% extends 'basefront.html.twig' %}
-
+{% extends 'base.html.twig' %}
 {% block body %}
 <!DOCTYPE html>
 <html lang="en">
 
 <!-- Mirrored from flatable.phoenixcoded.net/default/user-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 10 Jan 2019 11:43:04 GMT -->
 <head>
-<title>Profil</title>
+<title>Profile</title>
 
 
 <!--[if lt IE 9]>
@@ -49,87 +48,113 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/simple-line-icons.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/ionicons.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery.mCustomScrollbar.css')}}">
-    <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+            <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+
 </head>
 <body>
-<section id="main-content">
-      <section class="wrapper">
-        <!-- BASIC FORM ELELEMNTS -->
-        <div class="row mt">
-          <div class="col-lg-6 col-md-6 col-sm-6">
-    <div class="send-message">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="section-heading">
-              <h2>Modifier Mon profile</h2>
-              <img src="{{ asset('/uploads/'~session.all.Utilisateur.photo )}}" alt="User-Profile-Image">
-            </div>
-          </div>
-          <div class="col-md-8">
-            <div class="contact-form">
-              <form id="contact" action="" method="post">
-              {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
-              
-                <div class="row">
-                 
-                  <div class="col-lg-12 col-md-12 col-sm-12">
-                    <fieldset>
-                     {{ form_errors(form.nom) }}
-                     {{ form_widget(form.nom,{'attr': {'class': 'form-control' , 'placeholder' : 'Nom'}}) }}
-                    </fieldset>
-                  </div>
-                  <div class="col-lg-12 col-md-12 col-sm-12">
-                    <fieldset>
-                    {{ form_errors(form.prenom) }}
-                     {{ form_widget(form.prenom,{'attr': {'class': 'form-control' , 'placeholder' : 'Prenom'}}) }}
-                    </fieldset>
-                  </div>
-                  <div class="col-lg-12 col-md-12 col-sm-12">
-                    <fieldset>
-                    {{ form_errors(form.bday) }}
-                     {{ form_widget(form.bday,{'attr': {'class': 'form-control' , 'placeholder' : 'Date de naissance'}}) }}
-                    </fieldset>
-                  </div>
-                  <div class="col-lg-12 col-md-12 col-sm-12">
-                    <fieldset>
-                    {{ form_errors(form.genre) }}
-                     {{ form_widget(form.genre,{'attr': {'class': 'form-control' , 'placeholder' : 'genre'}}) }}
-                    </fieldset>
-                  </div>
-                  
-                  <div class="col-lg-12 col-md-12 col-sm-12">
-                    <fieldset>
-                    {{ form_errors(form.email) }}
-                     {{ form_widget(form.email,{'attr': {'class': 'form-control' , 'placeholder' : 'Email'}}) }}
-                    </fieldset>
-                  </div>
-                  <div class="col-lg-12 col-md-12 col-sm-12">
-                    <fieldset>
-                    {{ form_errors(form.domaine) }}
-                     {{ form_widget(form.domaine,{'attr': {'class': 'form-control' , 'placeholder' : 'Domaine'}}) }}
-                    </fieldset>
-                  </div>
-                  
-                               <br></br>
-                  <div class="row row-space">
-                      <div class="col-2">
-                        <div class="input-group">
-                        <br></br>
-                        {{ form_widget(form.Modifier,{'attr': {'class': 'btn btn-danger ', 'placeholder' : 'Modifier'}}) }}
+<br>
+<br>
+<h4><center>Changer Mot de Passe</center></h4>
+<br>
 
-                        </div>
-                         </div>
-                         
-                </div>
-              </form>
-              {{ form_end(form) }}
-            </div>
-          </div>
-          </div>
+<br>
+<div class="pcoded-content">
+<div class="pcoded-inner-content">
+<div class="main-body user-profile">
+<div class="page-wrapper">
+<div class="row">
+<div class="col-lg-12">
+<div class="tab-content">
+<div class="tab-pane active" id="personal" role="tabpanel">
+<div class="card">
+<div class="card-header">
+<h5 class="card-header-text">Changer..</h5>
+<button id="edit-btn" type="button" class="btn btn-sm btn-primary waves-effect waves-light f-right">
+<i class="icofont icofont-edit"></i>
+</button>
 </div>
-</section>
-</body>
+<div class="card-block">
+<div class="edit-info">
+   <div class="row">
+     <div class="col-lg-12">
+         <div class="general-info">
+             <div class="row">
+                 <div class="col-lg-6">
+                 {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+                     <table class="table">
+                         <tbody>
+                             <tr>
+                                 <td>
+                                     <div class="input-group">
+                                         <span class="input-group-addon"><i class="icofont icofont-email"></i></span>
+                                         
+                                         {{ form_errors(form.email) }}
+                                         {{ form_widget(form.email,{'attr': {'class': 'form-control' , 'placeholder' : 'Email'}}) }} 
+                                     </div>
+                                 </td>
+                             </tr>
+                             <tr>
+<td>
+<div class="input-group">
+                                         <span class="input-group-addon"><i class="icofont icofont-unlocked"></i></span>
+{{ form_errors(form.ancien) }}
+                                         {{ form_widget(form.ancien,{'attr': {'class': 'form-control' , 'placeholder' : 'Ancien Mo de passe'}}) }}
+
+ </div>                   
+</td>
+                                </tr>
+                                    
+                                    <tr>
+
+</tbody>
+</table>
+</div>
+
+<div class="col-lg-6">
+                <table class="table">
+                            <tbody>
+                                        <tr>
+<td>
+<div class="input-group">
+<span class="input-group-addon"><i class="icofont icofont-lock"></i></span>
+{{ form_errors(form.mdp) }}
+                                         {{ form_widget(form.mdp,{'attr': {'class': 'form-control' , 'placeholder' : 'Nouveau Mot de passe'}}) }}
+</div>
+</td>
+</tr>
+                        <tr>
+                    <td>
+            <div class="input-group">
+                    <span class="input-group-addon"><i class="icofont icofont-lock "></i></span>
+        {{ form_errors(form.confirm) }}
+                                         {{ form_widget(form.confirm,{'attr': {'class': 'form-control' , 'placeholder' : 'Retaper pour confirmer'}}) }}
+            </div>
+            </td>
+            </tr>
+
+                </tbody>
+                </table>
+</div>
+
+</div>
+
+<div class="text-center">
+
+{{ form_widget(form.Modifier,{'attr': {'class': 'btn btn-primary waves-effect waves-light m-r-20', 'placeholder' : 'Modifier'}}) }}
+<a href="#!" id="edit-cancel" class="btn btn-default waves-effect">Annuler</a>
+
+<br>
+<br>
+</div>
+{{ form_end(form) }}
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
 {% endblock %}
 {% block js %}
     <script data-cfasync="false" src="{{ asset('../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js')}}"></script>
@@ -151,8 +176,16 @@
     <script type="text/javascript" src="{{ asset('../bower_components/ckeditor/ckeditor.js')}}"></script>
     <script type="text/javascript"  src="{{ asset('assets/pages/chart/echarts/js/echarts-all.js')}}"></script>
     <script src="{{ asset('assets/pages/user-profile.js')}}"></script>
-      <script src="{{ asset('assets/pages/user-profile.js')}}"></script>
-
+      <!-- Flashy depends on jQuery -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Load Flashy default JavaScript -->
+    <script src="{{ asset ('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+    <!-- Include Flashy default partial -->
+    {{ include ('@MercurySeriesFlashy/flashy.html.twig') }}
     </body>
+   
+    
 </html>
 {% endblock %}
+
+

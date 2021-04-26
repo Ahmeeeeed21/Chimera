@@ -35,13 +35,13 @@
                        
                             <div class="form-group">
                             {{ form_errors(form.email) }}
-                            {{ form_widget(form.email,{'attr': {'class': 'zmdi zmdi-account ' , 'placeholder' : 'EMAIL'}}) }}
+                            {{ form_widget(form.email,{'attr': {'class': 'zmdi zmdi-account ' , 'placeholder' : 'EMAIL','name':'email'}}) }}
                             <label for="email"><i class="zmdi zmdi-email"></i></label>
                             </div>
 
                             <div class="form-group">
                             {{ form_errors(form.mdp) }}
-                            {{ form_widget(form.mdp,{'attr': {'class': 'zmdi zmdi-account ' ,'placeholder' : 'MOT DE PASSE'}}) }}  
+                            {{ form_widget(form.mdp,{'attr': {'class': 'zmdi zmdi-account ' ,'placeholder' : 'MOT DE PASSE','name':'mdp'}}) }}  
                             <label for="pass"><i class="zmdi zmdi-lock"></i></label>
                             </div>
                            
