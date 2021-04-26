@@ -1,0 +1,96 @@
+{% extends 'front.html.twig' %}
+
+  {% block body %}
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-header">
+                    <div class="page-header-title">
+                        <h4>Ingredient List</h4>
+                    </div>
+                    <div class="page-header-breadcrumb">
+                        <ul class="breadcrumb-title">
+                            <li class="breadcrumb-item">
+                                <a href="index-2.html">
+                                    <i class="icofont icofont-home"></i>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="#!">Ingredient</a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="#!">Ingredient List</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Ingredient List</h5>
+                                    <form action="{{ path('ingredient_new') }}" method="post">
+
+                                        <button class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" data-modal="modal-13"> <i class="icofont icofont-plus m-r-5" href="{{ path('ingredient_new') }}"></i> Add Ingredient</button>
+                                    </form>
+                                </div>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <div class="table-content">
+                                            <div class="project-table">
+                                                <table id="e-product-list" class="table table-striped dt-responsive nowrap">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Image</th>
+                                                        <th>Ingredient Name</th>
+                                                        <th>Calorie</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for ingredient in ingredients %}
+                                                        {{ dump(ingredient) }}
+                                                    <tr>
+                                                        <td class="pro-list-img">
+                                                            <img src="{{ asset('/images/ingredient/'~ingredient.image) }}" class="img-fluid" alt="{{'/images/ingredient/'~ingredient.image}}" width="150px" height="150px">
+                                                        </td>
+                                                        <td class="pro-name">
+                                                            <h6>{{ ingredient.nom }}</h6>
+                                                        </td>
+                                                        <td>{{ ingredient.calorie ~ "KCal/" ~ ingredient.unite  }}</td>
+
+                                                        <td class="action-icon">
+                                                            <a href="{{ path('ingredient_edit', {'id': ingredient.id}) }}" class="m-r-15 text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="{{ path('ingredient_delete', {'id': ingredient.id}) }}" class="text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</div>
+{% endblock %}

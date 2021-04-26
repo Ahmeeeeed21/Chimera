@@ -1,0 +1,17 @@
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+<div style="alignment: center">
+    <div>
+    <label style="margin-right: 20px;width: 200px;text-align: center">Nom de La recette</label>
+    <div style="margin-left: 10px;width: 200px;">{{ form_widget(form.idrecette) }}</div>
+    </div>
+<div>
+    <label style="margin-right: 20px;width: 200px;text-align: center">Nom de L'ingredient </label>
+            <div style="margin-left: 10px;width: 200px;">{{ form_widget(form.idingredient) }}</div>
+</div>
+<div>
+     <label  style="margin-right: 20px;width: 200px;text-align: center">Quantite  </label>
+             <div style="margin-left: 10px;width: 200px;">{{ form_widget(form.quantite) }}</div>
+</div>
+    <button class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block save_btn" style="margin-left: 65px;margin-top: 20px">{{ button_label|default('Save') }}</button>
+</div>
+{{ form_end(form) }}

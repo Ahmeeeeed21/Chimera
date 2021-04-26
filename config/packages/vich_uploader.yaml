@@ -1,0 +1,10 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        ingredients:
+            uri_prefix: /images
+            upload_destination: '%kernel.project_dir%/public/images/ingredient'
+        recettes:
+            uri_prefix: /images
+            upload_destination: '%kernel.project_dir%/public/images/recette'

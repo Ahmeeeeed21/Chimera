@@ -1,0 +1,152 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Utilisateur index{% endblock %}
+
+{% block body %}
+
+<div class="pcoded-inner-content">
+<div class="main-body">
+    <div class="page-wrapper">
+        <div class="page-header">
+            <div class="page-header-breadcrumb">
+                <ul class="breadcrumb-title">
+                    <li class="breadcrumb-item">
+                        <a href="index-2.html">
+                            <i class="icofont icofont-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="index.html.twig">Recettes</a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#!">Blog detail</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="page-body">
+            <div class="row">
+
+                <div class="col-sm-12">
+
+                    <div class="card blog-page">
+                        <div class="card-block">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <form method="GET" action="{{ path('pdf',{'idrecette':recette.idrecette}) }}">
+                                    <button style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;"><img src="https://img.icons8.com/doodle/48/000000/pdf--v3.png"/></button>
+                                    </form>
+                                    <div class="blog-single">
+
+                                        <group  style="display: inline-flex;margin-top: 50px" >
+                                            <h2 style="margin-left: 375px;font-family: 'Source Sans Pro', sans-serif;color: #187798">{{ recette.nomrecette }}</h2>
+                                            <h4 style="margin-left: 100px;margin-top: 2px;color: #8a1f11">{{ recette.typerecette }}</h4>
+                                        </group>
+                                        <img src="{{ asset('/images/recette/'~recette.image) }}" alt="image recette" style="width: 600px;height: 300px;margin-left:18%" >
+                                        <br><br><br>
+                                        <p style="font-size: 18px;margin-left: 20px;font-family:Serif">{{  recette.description|nl2br}}</p>
+                                        <br>
+                                        <h2 style="margin-left: 40%;-webkit-text-fill-color: #ff6f61">Ingredients</h2>
+                                        <br><br>
+                                        {% for Ingredient in recetteComplete %}
+                                        <group style="display: inline-flex;"class="Ingredient">
+                                        <div style="margin-left: 100px;margin-bottom: 25px">
+                                            <img src="{{ asset('/images/ingredient/'~ Ingredient.idingredient.image) }}" style="width: 150px;height: 150px;border-radius: 12px" >
+                                        <h6 style="width: 150px;height:20px;margin-top: 10px;text-align: center;color:#3f3735;font-family: 'Source Sans Pro', sans-serif;font-size: 16px;" >{{ Ingredient.quantite~Ingredient.idingredient.unite|split(' ')[1]}}</h6>
+                                            <h6 style="width: 150px;height:20px;margin-top: 10px;text-align: center;color:#3f3735;font-family: 'Source Sans Pro', sans-serif;font-size: 16px;text-decoration: underline;font-weight: bold;" >{{ Ingredient.idingredient.nom }}</h6>
+                                        </div>
+                                        </group>
+                                        {% endfor %}
+
+                                    </div>
+
+                                    <h2 style="margin-top: 40px;margin-bottom: 50px;margin-left: 40%;-webkit-text-fill-color: #ff6f61">Tableau Calorique</h2>
+
+
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Ingredient</th>
+                                            <th>Quantite</th>
+                                            <th>Calories/unite</th>
+                                            <th>Calories</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for Ingredient in recetteComplete %}
+                                            {%  set Calorie=Calorie+(Ingredient.quantite/Ingredient.idingredient.unite|split(' ')[0])*Ingredient.idingredient.calorie %}
+                                            <tr>
+                                            <td>{{ Ingredient.idingredient.nom }}</td>
+                                                <td>{{ Ingredient.quantite }}</td>
+                                                <td>{{ Ingredient.idingredient.calorie~'/'~Ingredient.idingredient.unite }}</td>
+                                                <td>{{ (((Ingredient.quantite/Ingredient.idingredient.unite|split(' ')[0])*Ingredient.idingredient.calorie) |round) ~ ' KCal'  }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        <tr >
+                                            <td colspan="3" style=" padding: 10px;">Somme</td>
+                                            <td>{{ (Calorie |round)~' KCal' }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+<style>
+    .Ingredient:hover{
+        zoom: 125%;
+        -webkit-text-fill-color: #187798;
+
+    }
+</style>
+                                </div>
+                                <hr class="m-t-40 m-b-40">
+                                <div class="row blog-big-user">
+                                    <div class="col-sm-2">
+                                        <img src="{{ asset('assets/images/blog/blog-130.png') }}" class="img-fluid img-circle" alt="blog-img">
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <div>
+                                            <h4 class="m-b-10 text-primary">About Marta Williams</h4>
+                                            <h6 class="m-b-5">Contant Manager</h6>
+                                            <p class="m-b-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                            <h5> <a href="#" class="text-primary"><i class="icofont icofont-circled-right" aria-hidden="true"></i> More by Marta Williams</a> </h5>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="m-t-40 m-b-40">
+
+
+                                <div class="blog-article">
+                                    <div class="container">
+                                        <h4>Related Recipies</h4>
+                                        <hr class="m-b-40">
+                                        <div>
+                                            <div class="row related-artical">
+                                                {% for Related in Relateds %}
+
+                                                <div class="col-md-4">
+                                                    <div class="articles">
+                                                        <img src="{{ asset('assets/images/blog/blog-r-1.jpg') }}" class="img-fluid c-pointer" alt="" />
+                                                        <h6>{{ Related.typerecette }}</h6>
+                                                        <a href="{{ path('show_more', {'idrecette': Related.idrecette}) }}">{{ Related.nomrecette }}</a>
+
+                                                        <a  href="{{ path('show_more', {'idrecette': Related.idrecette}) }}" class="btn btn-primary waves-effect waves-light" >Read More.... <span class="m-l-10"> <i class="icofont icofont-rounded-double-right"></i>
+</span></a>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

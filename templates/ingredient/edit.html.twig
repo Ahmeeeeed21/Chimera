@@ -1,0 +1,53 @@
+{% extends 'front.html.twig' %}
+{% block body %}
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-header">
+                    <div class="page-header-title">
+                        <h1> Modifier un Ingredient </h1>
+                    </div>
+                    <div class="page-header-breadcrumb">
+                        <ul class="breadcrumb-title">
+                            <li class="breadcrumb-item">
+                                <a href="index-2.html">
+                                    <i class="icofont icofont-home"></i>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="#!">E-Commerce</a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="#!">Product List</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+
+    {{ include('ingredient/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('ingredient_index') }}">back to list</a>
+
+                            <form method="post" action="{{ path('ingredient_delete', {'id': ingredient.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                <button class="btn">Delete</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+    </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,145 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Recette index{% endblock %}
+
+
+
+
+{% block body %}
+
+
+<div class="main-body">
+    <div class="page-wrapper">
+
+        <div class="page-header">
+            <div class="page-header-title">
+                <h4>Suivi</h4>
+            </div>
+            <div class="page-header-breadcrumb">
+                <ul class="breadcrumb-title">
+                    <li class="breadcrumb-item">
+                        <a href="index-2.html">
+                            <i class="icofont icofont-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#!">Suivi</a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#!">Suivi</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="page-body">
+
+            <div class="card blog-page" id="blog">
+                <form action="{{ path('suivi_new') }}" method="post">
+                    <button class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" data-modal="modal-13"> <i class="icofont icofont-plus m-r-5" ></i> Add Suivi</button>
+                </form>
+                <div class="card-block">
+
+                    <div class="row">
+                        {% if suivis is empty %}
+
+                            <h1>no records found</h1>
+
+
+                        {% else %}
+
+
+                            {% for suivi in suivis %}
+
+
+                                <div class="col-lg-6 col-md-12 col-xl-4 blog-page-card">
+                                    <div class="blog-box">
+                                        <div class="blog-img">
+                                        </div>
+                                        <div class="blog-detail">
+                                            <div class="blog-title">
+
+                                                    <img src="{{ asset('assets/images/avatar-1.png') }}" style="alignment: left;margin-top: 15px">
+                                                    <br>
+                                               <h4 style="text-align: center">Check up</h4>
+                                            </div>
+                                            <div>
+                                                <p style="display: inline-block;">Date:</p>
+                                                <h6 style="margin-top: 20px;display: inline-block;"><b> {{suivi.date ? suivi.date|date('Y-m-d') : '' }}</b></h6>
+                                                <p>{{ 'Poids: '~ suivi.poids ~' Kg' }}</p>
+                                                <p>  {{'Taille: ' ~ suivi.taille ~ ' m' }}</p>
+                                                <p>  {{ 'Activités: '~ suivi.heureActivite ~' h' }}</p>
+                                                <p>   {{'Consommation en eau: ' ~ suivi.consoEau ~ ' L' }} </p>
+                                                {%  set IMC = ((suivi.poids)/suivi.taille**2)|round %}
+                                                <p> {{ 'IMC:' ~ IMC   }}</p>
+                                                {% set PoidIdeal = (22*(suivi.taille**2))|round %}
+                                                <p style="display: inline-block;"> {{ 'Poids Ideale: '  }} </p>
+                                                <p style="color: #0c7096;display: inline-block;">{{ PoidIdeal ~ ' Kg' }}</p>
+                                                {% if IMC<18.5 %}
+                                                <p>Dignostique:Etat de Maigreur </p>
+                                                    <p>Votre Poids est un peu plus faible que la normal essayez de gagner du poids</p>
+                                                {% elseif IMC<24.9 %}
+                                                <p>Dignostique:Etat Normal(Ideale) </p>
+                                                <p>Votre Poids est parfait essayez de le stabiliser a plus ou moins 1kg</p>
+                                                {% elseif IMC<29.9 %}
+                                                    <p>Dignostique:Etat de Surpoids </p>
+                                                    <p>Votre Poids est superieur a la normal mais vous étes hors de danger</p>
+                                                {% elseif IMC<40 %}
+                                                    <p>Dignostique:Etat d'Obesité </p>
+                                                    <p>Votre situation commence a devenir inquietante, vous devez perdre du poids au plus vite</p>
+                                                    {% else %}
+                                                        <p>Dignostique:Etat d'Obesité Severe</p>
+                                                        <p>Votre situation est inquietante, vous devez perdre massivement du poids au plus vite et changer votre alimentation</p>
+
+
+                                                        {% endif %}
+                                                <p>Pour maintenir la forme je vous suggeres des recettes <a href=" {{path('recette_front_index')}} ">ici</a></p>
+<style>
+    :is(p)
+    {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: medium;
+        color: #0c0c0c;
+
+    }
+</style>
+
+
+                                            </div>
+                                            <div class="btn-blog" >
+                                                <a class="btn btn-primary"  href="{{ path('suivi_edit', {'id': suivi.id}) }}">Edit</a>
+                                                <a class="btn btn-primary"  href="{{ path('suivi_show', {'id': suivi.id}) }}">Show More</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- IMC -->
+            <div class="yz-widget" data-calculator-type="bmi" data-language="fr" data-unit-system="metric" data-background-color="#EEEEEE" data-text-color="#212121" data-primary-color="#03A9F4" data-alternate-background-color="#FFFFFF" data-alternate-text-color="#FFFFFF" data-secondary-color="#FFC107"><span class="yz-copyright">Powered by <a href="https://www.yazio.com/fr/calcul-imc">YAZIO</a></span></div>
+            <script src="https://widget.yazio.com/calculator.js" async></script>
+            <!-- poids Ideale -->
+            <div class="yz-widget" data-calculator-type="ideal_weight" data-language="fr" data-unit-system="metric" data-background-color="#EEEEEE" data-text-color="#212121" data-primary-color="#03A9F4" data-alternate-background-color="#FFFFFF" data-alternate-text-color="#FFFFFF" data-secondary-color="#FFC107"><span class="yz-copyright">Powered by <a href="https://www.yazio.com/fr/calcul-poids-ideal">YAZIO</a></span></div>
+            <script src="https://widget.yazio.com/calculator.js" async></script>
+            <!-- Apport calorique journalier -->
+            <div class="yz-widget" data-calculator-type="daily_need" data-language="fr" data-unit-system="metric" data-background-color="#EEEEEE" data-text-color="#212121" data-primary-color="#03A9F4" data-alternate-background-color="#FFFFFF" data-alternate-text-color="#FFFFFF" data-secondary-color="#FFC107"><span class="yz-copyright">Powered by <a href="https://www.yazio.com/fr/calcul-apport-calorique">YAZIO</a></span></div>
+            <script src="https://widget.yazio.com/calculator.js" async></script>
+            <!-- Calorie bruler -->
+            <div class="yz-widget" data-calculator-type="calories_burned" data-language="fr" data-unit-system="metric" data-background-color="#EEEEEE" data-text-color="#212121" data-primary-color="#03A9F4" data-alternate-background-color="#FFFFFF" data-alternate-text-color="#FFFFFF" data-secondary-color="#FFC107"><span class="yz-copyright">Powered by <a href="https://www.yazio.com/fr/calcul-calories-brulees">YAZIO</a></span></div>
+            <script src="https://widget.yazio.com/calculator.js" async></script>
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+</div>
+</div>
+</div>
+{% endblock %}

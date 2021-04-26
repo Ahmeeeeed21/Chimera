@@ -1,0 +1,146 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Recette index{% endblock %}
+
+
+
+
+{% block body %}
+
+
+    <div class="main-body">
+    <div class="page-wrapper">
+
+    <div class="page-header">
+        <div class="page-header-title">
+            <h4>Recette</h4>
+        </div>
+        <div class="page-header-breadcrumb">
+            <ul class="breadcrumb-title">
+                <li class="breadcrumb-item">
+                    <a href="index-2.html">
+                        <i class="icofont icofont-home"></i>
+                    </a>
+                </li>
+                <li class="breadcrumb-item"><a href="#!">Recette</a>
+                </li>
+                <li class="breadcrumb-item"><a href="#!">Recette</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="page-body">
+        <div class="topnav">
+            <style>
+                .topnav {
+                    overflow: hidden;
+                    background-color: white;
+                    border-color: #cccccc;
+                    border-style: solid;
+                    border-width: 1px 0px 1px 0px;
+                    margin-bottom: 2px;
+                }
+
+                .topnav a {
+                    float: left;
+                    color: black;
+                    text-align: center;
+                    padding: 14px 16px;
+                    text-decoration: none;
+                    font-size: 16px;
+                    font-family: Arial, Helvetica, sans-serif;
+
+                }
+
+                .topnav a:hover {
+                    color: #ff6f61;
+                    border-style: solid;
+                    border-width: 0px 0px 5px 0px;
+                    border-color: #ff6f61;
+                }
+
+
+
+                a + a {
+                    margin-left: 30px;
+                }
+                #firsta{
+                    margin-left: 100px;
+                }
+
+            </style>
+            </style>
+            <a href="{{path('recette_front_index')}}" id="firsta">Toutes</a>
+            <a href="{{path('recette_front_afficher',{'typerecette': 'Entrée'})}}">Entrées</a>
+            <a href="{{path('recette_front_afficher',{'typerecette': 'Plat'})}}">Plats</a>
+            <a href="{{path('recette_front_afficher',{'typerecette': 'Dessert'})}}">Desserts</a>
+            <a href="{{path('recette_front_afficher',{'typerecette': 'Amuse bouche'})}}">Amuses bouches</a>
+            <a href="{{path('recette_front_afficher',{'typerecette': 'Sauce'})}}">Sauces</a>
+            <a href="{{path('recette_front_afficher',{'typerecette': 'Accompagnement'})}}">Accompagnements</a>
+            <a href="{{path('recette_front_afficher',{'typerecette': 'Boisson'})}}">Boissons</a>
+
+        </div>
+        <div class="card blog-page" id="blog">
+
+            <div class="card-block">
+
+                <div class="row">
+                    {% if recettes is empty %}
+
+                        <h1>no records found</h1>
+
+
+                    {% else %}
+                        {% for recette in recettes %}
+
+
+
+                            <div class="col-lg-6 col-md-12 col-xl-4 blog-page-card">
+                                <div class="blog-box">
+                                    <div class="blog-img">
+                                        <img class="img-fluid" src="{{ asset('assets/images/user-card/inverse-img1.jpg') }}" alt="">
+
+                                    </div>
+                                    <div class="blog-detail">
+                                        <div class="blog-title">
+                                            <h5 style="margin-top: 20px">{{ recette.nomrecette }}</h5>
+                                        </div>
+                                        <div class="blog-date">
+
+                                            <i>{{ recette.TypeRecette }}</i>
+                                            <p class="author"><b>Posted by :</b> <a>Coach Name</a></p>
+                                        </div>
+                                        <div class="btn-blog">
+
+                                            <a class="btn btn-primary" style="margin-left: 100px" href="{{ path('show_more', {'idrecette': recette.idrecette}) }}">Show More</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+        const accountSid = process.env.TWILIO_ACCOUNT_SID;
+        const authToken = process.env.TWILIO_AUTH_TOKEN;
+        const client = require('twilio')(accountSid, authToken);
+
+        client.messages
+            .create({body: 'Hi there!', from: '+15017122661', to: '+15558675310'})
+            .then(message => console.log(message.sid));
+
+    </script>
+
+
+{% endblock %}

@@ -1,0 +1,170 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Recette index{% endblock %}
+
+
+
+
+{% block body %}
+<div class="pcoded-content">
+<div class="pcoded-inner-content">
+    <div class="main-body">
+    <div class="page-wrapper">
+
+    <div class="page-header">
+        <div class="page-header-title">
+            <h4>Recette</h4>
+        </div>
+        <div class="page-header-breadcrumb">
+            <ul class="breadcrumb-title">
+                <li class="breadcrumb-item">
+                    <a href="index-2.html">
+                        <i class="icofont icofont-home"></i>
+                    </a>
+                </li>
+                <li class="breadcrumb-item"><a href="#!">Recette</a>
+                </li>
+                <li class="breadcrumb-item"><a href="#!">Recette</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="page-body">
+
+        <div class="card blog-page" id="blog">
+
+            <div class="card-block">
+                <h4>Recette Accepter</h4>
+                <div class="row">
+<style>
+    :is(h4){
+    color: #ff6f61;
+    font-family: 'Source Sans Pro', sans-serif;
+    height: 20px;
+    width: 100%;
+    text-align: center;
+        margin-top: 20px;
+    margin-bottom: 20px;
+    }
+    :is(img){
+        border-radius: 12px;
+    }
+</style>
+
+                        {% for recette in recettea %}
+                            <div class="col-lg-6 col-md-12 col-xl-4 blog-page-card" style="margin-bottom: 10px">
+                                <div class="blog-box">
+                                    <div class="blog-img">
+                                        <img class="img-fluid" src="{{ asset('/images/'~recette.image) }}" alt="">
+
+                                    </div>
+                                    <div class="blog-detail">
+                                        <div class="blog-title">
+                                            <h5 style="margin-top: 20px">{{ recette.nomrecette }}</h5>
+                                        </div>
+                                        <div class="blog-date">
+
+                                            <i>{{ recette.TypeRecette }}</i>
+                                            <p class="author"><b>Posted by :</b> <a>Coach Name</a></p>
+                                        </div>
+                                        <p>{{ recette.etat}}</p>
+                                        <div class="btn-blog">
+
+                                            <a class="btn btn-success btn-round" href="{{ path('show_more', {'idrecette': recette.idrecette}) }}">Show More</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+
+                </div>
+
+                <h4>Recette En Attente</h4>
+                <div class="row">
+                    {% for recette in recettew %}
+                        <div class="col-lg-6 col-md-12 col-xl-4 blog-page-card" style="margin-bottom: 10px">
+                            <div class="blog-box">
+                                <div class="blog-img">
+                                    <img class="img-fluid" src="{{ asset('/images/'~recette.image) }}" alt="">
+
+                                </div>
+                                <div class="blog-detail">
+                                    <div class="blog-title">
+                                        <h5 style="margin-top: 20px">{{ recette.nomrecette }}</h5>
+                                    </div>
+                                    <div class="blog-date">
+
+                                        <i>{{ recette.TypeRecette }}</i>
+                                        <p class="author"><b>Posted by :</b> <a>Coach Name</a></p>
+                                    </div>
+                                    <p>{{ recette.etat}}</p>
+                                    <div class="btn-blog">
+
+                                        <a class="btn btn-success btn-round" href="{{ path('show_more', {'idrecette': recette.idrecette}) }}">Show More</a>
+                                        <br><br>
+                                        <a class="btn btn-info btn-round" href="{{ path('Accepter', {'idrecette': recette.idrecette}) }}">Accepter</a>
+                                        <a class="btn btn-danger btn-round" href="{{ path('Refuser', {'idrecette': recette.idrecette}) }}">Refuser</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+                <h4>Recette Refuser</h4>
+                <div class="row">
+                    {% for recette in recetter %}
+                        <div class="col-lg-6 col-md-12 col-xl-4 blog-page-card" style="margin-bottom: 10px">
+                            <div class="blog-box">
+
+
+                                <div class="blog-img">
+
+                                    <img class="img-fluid" src="{{ asset('/images/'~recette.image) }}" alt="">
+
+                                </div>
+                                <div class="blog-detail">
+                                    <div class="blog-title">
+                                        <h5 style="margin-top: 20px">{{ recette.nomrecette }}</h5>
+                                    </div>
+                                    <div class="blog-date">
+
+                                        <i>{{ recette.TypeRecette }}</i>
+                                        <p class="author"><b>Posted by :</b> <a>Coach Name</a></p>
+                                    </div>
+                                    <p>{{ recette.etat}}</p>
+                                    <div class="btn-blog">
+
+                                        <a class="btn btn-success btn-round" href="{{ path('show_more', {'idrecette': recette.idrecette}) }}">Show More</a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+
+                    <div id="div_chart"></div>
+                    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                    <script type="text/javascript">
+                        {{ gc_draw(piechart, 'div_chart') }}
+                    </script>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+    </div>
+
+
+
+{% endblock %}

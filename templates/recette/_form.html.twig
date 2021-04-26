@@ -1,0 +1,42 @@
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+<div>
+
+    <div>
+            <label>Nom de La recette</label>
+
+        <div>{{ form_widget(form.nomrecette) }}</div>
+
+            <h6 style="text-align: center;color: red;font-size: medium;font-family: serif;">{{ form_errors(form.nomrecette) }} </h6>
+        </div>
+    <div>
+            <label>Image</label>
+
+        <div> {{ form_widget(form.image_File) }}</div>
+
+            <h6 style="text-align: center;color: red;font-size: medium;font-family: serif;">{{ form_errors(form.image_File) }} </h6>
+        </div>
+    <div>
+          <label>type de recette</label>
+
+        <div>   {{ form_widget(form.typerecette) }} </div>
+
+            <h6 style="text-align: center;color: red;font-size: medium;font-family: serif;">{{ form_errors(form.typerecette) }} </h6>
+        </div>
+
+    <div>
+           <label>Comment preparé la recette</label>
+
+        <div>    {{ form_widget(form.description) }} </div>
+            <h6 style="text-align: center;color: red;font-size: medium;font-family: serif;">{{ form_errors(form.description) }} </h6>
+        </div>
+
+    <tr><td colspan="2"><button class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block save_btn" style="margin-left: 150px;">{{ button_label|default('Save') }}</button></td></tr>
+</div>
+{{ form_end(form) }}
+<style>
+    :is(label){
+        display:inline-block;
+        margin-right: 15px;
+        width: 140px;
+    }
+</style>

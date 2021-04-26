@@ -1,0 +1,13 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}New Ingredientrecette{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un Ingredient a une recette</h1>
+
+
+    {{ include('ingredientrecette/_form.html.twig') }}
+    <h6 style="float: left">Votre ingredient n'est pas dans la liste?</h6><a href="{{ path('ingredient_index') }}">Oui</a>
+    <br><br>
+    <a href="{{ path('ingredientrecette_index') }}">back to list</a>
+{% endblock %}

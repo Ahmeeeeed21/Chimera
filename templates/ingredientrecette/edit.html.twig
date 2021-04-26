@@ -1,0 +1,18 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Edit Ingredientrecette{% endblock %}
+
+{% block body %}
+    <h1>Edit Ingredient dans une recette</h1>
+
+    {{ include('ingredientrecette/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('ingredientrecette_index') }}">back to list</a>
+    <h6 style="float: left">Votre ingredient n'est pas dans la liste?</h6><a href="{{ path('ingredient_new') }}">Oui</a>
+    <br><br>
+
+    <form method="post" action="{{ path('ingredientrecette_delete', {'id': ingredientrecette.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+        <button class="btn">Delete</button>
+    </form>
+
+{% endblock %}

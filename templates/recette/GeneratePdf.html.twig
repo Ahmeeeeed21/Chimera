@@ -1,0 +1,70 @@
+
+<div class="page-body">
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div class="card blog-page">
+                <div class="card-block">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="blog-single">
+
+                                <group>
+                                    <h2 style="margin-left: 250px;font-family: 'Source Sans Pro', sans-serif;color: #187798">{{ recette.nomrecette ~ ' : ' ~ recette.typerecette }}</h2>
+                                </group>
+                                <br><br><br>
+                                <p style="font-size: 18px;margin-left: 20px;font-family:Serif">{{  recette.description|nl2br}}</p>
+                                <br>
+                                <h2 style="margin-left: 40%;-webkit-text-fill-color: #ff6f61">Liste des Ingredients</h2>
+                                <br><br>
+                                {% for Ingredient in recetteComplete %}
+                                    <group>
+                                        <div style="margin-left: 100px;margin-bottom: 5px">
+
+                                            <h6 style="width: 500px;height:20px;margin-top: 2px;text-align: left;color:#3f3735;font-family: 'Source Sans Pro', sans-serif;font-size: 16px;" >{{ Ingredient.quantite~Ingredient.idingredient.unite|split(' ')[1] ~ ' ' ~ Ingredient.idingredient.nom}}</h6>
+                                        </div>
+                                    </group>
+                                {% endfor %}
+
+                            </div>
+
+                            <h2 style="margin-top: 40px;margin-bottom: 50px;margin-left: 40%;-webkit-text-fill-color: #ff6f61">Tableau Calorique</h2>
+
+
+                            <table class="table" style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>Ingredient</th>
+                                    <th>Quantite</th>
+                                    <th>Calories/unite</th>
+                                    <th>Calories</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for Ingredient in recetteComplete %}
+                                    {%  set Calorie=Calorie+(Ingredient.quantite/Ingredient.idingredient.unite|split(' ')[0])*Ingredient.idingredient.calorie %}
+                                    <tr>
+                                        <td style="width: 25%;text-align: center">{{ Ingredient.idingredient.nom }}</td>
+                                        <td style="width: 25%;text-align: center">{{ Ingredient.quantite }}</td>
+                                        <td style="width: 25%;text-align: center">{{ Ingredient.idingredient.calorie~'/'~Ingredient.idingredient.unite }}</td>
+                                        <td style="width: 25%;text-align: center">{{ (((Ingredient.quantite/Ingredient.idingredient.unite|split(' ')[0])*Ingredient.idingredient.calorie) |round) ~ ' KCal'  }}</td>
+                                    </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td colspan="3" style="width: 75%;text-align: right;font-size: 20px;">Somme</td>
+                                    <td style="font-size: 20px">{{ (Calorie |round)~' KCal' }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+<div>
+<div ">
+    <label style="display: inline-block">Nom</label>
+    <div style="display: inline-block">{{ form_widget(form.nom) }}</div>
+    <h6 style="text-align: center;color: red;font-size: medium;font-family: serif;">{{ form_errors(form.nom) }} </h6>
+</div>
+
+<div>
+    <label style="display: inline-block">Image</label>
+    <div style="display: inline-block;background-color: grey"> {{ form_widget(form.image_File) }}</div>
+    <h6 style="text-align: center;color: red;font-size: medium;font-family: serif;">{{ form_errors(form.image_File) }} </h6>
+</div>
+
+<div>
+    <label style="display: inline-block">Calorie/unite</label>
+    <div style="display: inline-block">  {{ form_widget(form.calorie) }}</div>
+    <h6 style="text-align: center;color: red;font-size: medium;font-family: serif;">{{ form_errors(form.calorie) }} </h6>
+</div>
+
+<div>
+    <label style="display: inline-block">unite</label>
+    <div style="display: inline-block">  {{ form_widget(form.unite) }}</div>
+    <h6 style="text-align: center;color: red;font-size: medium;font-family: serif;">{{ form_errors(form.unite) }} </h6>
+</div>
+
+
+<button class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block save_btn" style="margin-left: 150px;">{{ button_label|default('Save') }}</button>
+</div>
+    {{ form_end(form) }}
+
+<style>
+    :is(label){
+        display:inline-block;
+        margin-right: 15px;
+        width: 140px;
+    }
+
+</style>

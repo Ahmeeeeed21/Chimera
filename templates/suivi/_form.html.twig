@@ -1,0 +1,48 @@
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+<div style="margin-left: 40%">
+    <div>
+          <label>Votre poids</label>
+
+          <div style="width: 100px;display:inline-block;">  {{ form_widget(form.poids) }}</div>
+
+            <h6 style="text-align: center;color: red;font-size: medium;font-family: serif;">{{ form_errors(form.poids) }} </h6>
+    </div>
+    <div>
+        <label>Votre taille</label>
+
+    <div style="width: 100px;display:inline-block;">   {{ form_widget(form.taille) }} </div>
+
+            <h6 style="text-align: center;color: red;font-size: medium;font-family: serif;">{{ form_errors(form.taille) }} </h6>
+    </div>
+    <div>
+        <label>heurs d'activité</label>
+
+    <div  style="width: 100px;display:inline-block;">  {{ form_widget(form.heureActivite) }} </div>
+
+            <h6 style="text-align: center;color: red;font-size: medium;font-family: serif;">{{ form_errors(form.heureActivite) }} </h6>
+    </div>
+    <div>
+            <label>consomation en eau</label>
+
+    <div style="width: 100px;display:inline-block;">{{ form_widget(form.consoEau) }} </div>
+
+            <h6 style="text-align: center;color: red;font-size: medium;font-family: serif;">{{ form_errors(form.consoEau) }} </h6>
+    </div>
+<div>
+    <div  style="width: 200px;display:inline-block;margin-left: 100px">{{ form_widget(form.captcha)}}</div>
+
+</div>
+
+<br>
+    <a href="{{ path('suivi_index') }}">back to list</a>
+<button class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block save_btn" style="margin-left: 100px;">{{ button_label|default('Save') }}</button>
+
+</div>
+    {{ form_end(form) }}
+<style>
+    :is(label){
+        display:inline-block;
+        margin-right: 15px;
+        width: 140px;
+    }
+</style>
