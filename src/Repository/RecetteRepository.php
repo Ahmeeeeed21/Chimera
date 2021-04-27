@@ -38,11 +38,13 @@ class RecetteRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-    public function search($name)
+    public function search($name,$type)
     {
         return $this->createQueryBuilder('r')
             ->where('r.nomrecette LIKE :val')
             ->setParameter('val', $name.'%')
+            ->Andwhere('r.typerecette LIKE :type')
+            ->setParameter('type', $type.'%')
             ->getQuery()
             ->getResult();
     }
@@ -71,7 +73,6 @@ class RecetteRepository extends ServiceEntityRepository
 
             ->andWhere('r.typerecette = :val')
             ->setParameter('val', $value)
-
             ->getQuery()->getResult();
     }
     public function findRecettebyType2($value){
@@ -89,15 +90,7 @@ $dqlresult=$this->getEntityManager()->createQuery("select r from App:Recette r w
         return $query->getResult();
     }
 
-    public function countByEtat($Valeur)
-    {
-        return $this->createQueryBuilder('r')
-            ->select('count(r.idrecette)')
-            ->AndWhere('r.etat = :val')
-            ->setParameter('val',$Valeur)
-            ->getQuery()
-            ->getSingleScalarResult();
-    }
+
 
 
 

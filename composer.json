@@ -13,6 +13,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.1",
         "doctrine/orm": "^2.8",
         "gregwar/captcha-bundle": "^2.1",
+        "knplabs/knp-paginator-bundle": "^5.4",
         "knplabs/knp-snappy-bundle": "^1.8",
         "martin-georgiev/social-post-bundle": "^3.1",
         "phpdocumentor/reflection-docblock": "^5.2",

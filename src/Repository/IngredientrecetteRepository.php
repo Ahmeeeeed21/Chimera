@@ -46,13 +46,26 @@ class IngredientrecetteRepository extends ServiceEntityRepository
             ->addSelect('r')
             ->addSelect('i')
             ->addSelect('ir')
-            ->Where('ir.idingredient  = :val')
+            ->Where('i.nom = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getResult()
             ;
     }
 
+    public function search($name)
+    {
+        return $this->createQueryBuilder('ir')
+            ->innerjoin('ir.idrecette','r')
+            ->innerjoin('ir.idingredient','i')
+            ->addSelect('i')
+            ->addSelect('r')
+            ->addSelect('ir')
+            ->where('ir.idrecette.nomrecette LIKE :val')
+            ->setParameter('val', $name.'%')
+            ->getQuery()
+            ->getResult();
+    }
     public function triRecetteComplete()
     {
         return $this->createQueryBuilder('ir')

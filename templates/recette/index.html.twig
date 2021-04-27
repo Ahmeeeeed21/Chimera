@@ -35,18 +35,17 @@
 
                         <form role="search" id="nav-search-form" method="get" action="{{ path('recherche') }}">
 
-                            <div class="card-block" style="width: 300px;height:225px;margin-left: 40%;background-color: #f5f5f5;margin-bottom: 20px">
+                            <div class="card-block" style="width: 300px;height:200px;margin-left: 40%;background-color: #f5f5f5;margin-bottom: 20px">
                                 <label style="width: 250px;text-align: center;font-size: 20px;font-family: sans-serif;font-weight:bold;color: #393c6d">Rechercher une recette</label>
-                                <label style="font-size: 12px">(je cherche une recette en fonction des ingrédients que j'ai dans mon frigo)</label>
                                 <div class="input-group">
                                     <div class="input-group input-group-button input-group-primary" style="margin-bottom: 1px">
-                                    <input class="form-control" type="text" placeholder="Ingredient" />
+                                    <input class="form-control" type="text" id="search"  name="search" placeholder="Nom de recette" />
                                     </div>
                                 </div>
                                 <div class="input-group">
-                                    <div class="input-group input-group-button input-group-primary">
+                                    <div class="input-group input-group-button input-group-primary" >
 
-                                        <input type="text" class="form-control" id="search"  name="search" placeholder="Ingredient">
+                                        <input type="text" class="form-control" id="search1"  name="search1" placeholder="Type de recette" />
                                         <span class="input-group-addon">
                                             <button class="btn btn-primary">Search</button>
                                             </span>
@@ -107,9 +106,14 @@
 
                             </div>
                         <div class="card blog-page" id="blog">
+                            <div>
                             <form action="{{ path('recette_new') }}" method="post">
                                 <button class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" data-modal="modal-13"> <i class="icofont icofont-plus m-r-5" ></i> Add Recette</button>
+
                             </form>
+                                <a class="btn btn-primary"  href="{{ path('ingredientrecette_index') }}">Edit Ingredients</a>
+                            </div>
+
 
                             <div class="card-block">
 
@@ -143,10 +147,8 @@
                                                 <div class="btn-blog" >
                                                     <a class="btn btn-primary"  href="{{ path('recette_edit', {'idrecette': recette.idrecette}) }}">Edit</a>
                                                     <a class="btn btn-primary"  href="{{ path('show_more', {'idrecette': recette.idrecette}) }}">Show More</a>
-                                                    <form action="{{ path('ingredientrecette_index', {'idrecette': recette.idrecette}) }}" class="btn" method="get">
-                                                        <button class="btn btn-primary"  >Edit Ing</button>
-                                                        <input type="hidden" name="IDD" value="{{ recette.idrecette }}">
-                                                    </form>
+
+
 
                                                 </div>
                                             </div>
@@ -163,16 +165,8 @@
                     </div>
 
 
-    <script>
-        const accountSid = process.env.TWILIO_ACCOUNT_SID;
-        const authToken = process.env.TWILIO_AUTH_TOKEN;
-        const client = require('twilio')(accountSid, authToken);
 
-        client.messages
-            .create({body: 'Hi there!', from: '+15017122661', to: '+15558675310'})
-            .then(message => console.log(message.sid));
-
-    </script>
-
-
+    <div class="navigation" style="margin-left: 45%">
+        {{ knp_pagination_render(recettes) }}
+    </div>
 {% endblock %}

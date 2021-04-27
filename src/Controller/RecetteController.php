@@ -7,7 +7,7 @@ use App\Entity\Recette;
 use App\Entity\Ingredientrecette;
 use App\Form\IngredientrecetteType;
 use App\Form\RecetteType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,32 +22,47 @@ use Twilio\Rest\Client;
 /**
  * @Route("/recette")
  */
-class RecetteController extends AbstractController
+class RecetteController extends Controller
 {
     /**
      * @Route("/", name="recette_index", methods={"GET"})
      */
-    public function index(): Response
+    public function index(Request $request)
     {
         $recettes = $this->getDoctrine()
             ->getRepository(Recette::class)
             ->findAll();
+        $pagerecette = $this->get('knp_paginator')->paginate(
+        // Doctrine Query, not results
+            $recettes,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            6
+        );
         return $this->render('recette/index.html.twig', [
-            'recettes' => $recettes,
+            'recettes' => $pagerecette,
 
         ]);
     }
     /**
      * @Route("/front", name="recette_front_index", methods={"GET"})
      */
-    public function index_front(): Response
+    public function index_front(Request $request): Response
     {
         $recettes = $this->getDoctrine()
             ->getRepository(Recette::class)
             ->findBy(array('etat'=>'Accepter'));
-
+        $pagerecette = $this->get('knp_paginator')->paginate(
+        // Doctrine Query, not results
+            $recettes,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            6
+        );
         return $this->render('recette/index_front.html.twig', [
-            'recettes' => $recettes,
+            'recettes' => $pagerecette,
         ]);
     }
     /**
@@ -192,9 +207,9 @@ class RecetteController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($recette);
             $entityManager->flush();
-    return $this->redirectToRoute('recette_index');
+
         $sid = 'AC2e3f103543a521c05ddbd7f53f95f5bd';
-        $token = '60024a71d98cc514cca9d408c74bf1e2';
+        $token = '016ed8adb152e9ae3b807750c42e60b3';
         $client = new Client($sid, $token);
 
 // Use the client to do fun stuff like send text messages!
@@ -205,10 +220,10 @@ class RecetteController extends AbstractController
                 // A Twilio phone number you purchased at twilio.com/console
                 'from' => '+16157518411',
                 // the body of the text message you'd like to send
-                'body' => 'Votre recette a été supprimer'
+                'body' => 'Votre recette '.$recette->getNomrecette()  .' a été supprimer'
             ]
         );
-
+        return $this->redirectToRoute('recette_index');
     }
     /**
      * @Route("/{idrecette}/accepter", name="Accepter", methods={"GET"})
@@ -271,7 +286,7 @@ class RecetteController extends AbstractController
             'Calorie' => $Calorie
         ]);
 
-        $filename = 'myFirstSnappyPDF';
+        $filename = $recette->getNomrecette().'pdf';
 
         return new Response(
             $snappy->getOutputFromHtml($html),
@@ -282,30 +297,28 @@ class RecetteController extends AbstractController
             )
         );
     }
+
     /**
      * @Route("/r/recherche", name="recherche", methods={"GET"})
      */
-    public function RechercheRecette(Request $request,RecetteRepository $rec): Response
+    public function RechercheRecette(Request $request,recetteRepository $rec): Response
     {
         $nom = $request->get('search');
-        $search = $rec->search($nom);
+        $type = $request->get('search1');
+        $search = $rec->search($nom,$type);
+        $pagerecette = $this->get('knp_paginator')->paginate(
+        // Doctrine Query, not results
+            $search,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            6
+        );
         return $this->render('recette/index.html.twig', [
-            'recettes' => $search,
+            'recettes' => $pagerecette,
         ]);
-       // return new Response(json_encode($search));
     }
 
-    /**
-     * @Route("/searchRecette ", name="searchRecette")
-     */
-    public function searchRecette(Request $request,NormalizerInterface $Normalizer,RecetteRepository $repository)
-{
-    $requestString=$request->get('searchValue');
-    $students = $repository->search($requestString);
-    $jsonContent = $Normalizer->normalize($students, 'json',['groups'=>'recettes:read']);
-    $retour=json_encode($jsonContent);
-    return new Response($retour);
-}
 
 
 }
