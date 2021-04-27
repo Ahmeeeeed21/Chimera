@@ -6,7 +6,7 @@ use App\Entity\Suivi;
 use App\Entity\Utilisateur;
 use App\Form\SuiviType;
 use MercurySeries\FlashyBundle\FlashyNotifier;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,19 +14,22 @@ use Symfony\Component\Validator\Constraints\DateTime;
 /**
  * @Route("/suivi")
  */
-class SuiviController extends AbstractController
+class SuiviController extends Controller
 {
     /**
      * @Route("/", name="suivi_index", methods={"GET"})
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
         $suivis = $this->getDoctrine()
             ->getRepository(Suivi::class)
-            ->findAll();
+            ->findBy(['idutilisateur'=>1]);
+
+        $pagerecette = $this->get('knp_paginator')->paginate(
+            $suivis, $request->query->getInt('page', 1), 3);
 
         return $this->render('suivi/index.html.twig', [
-            'suivis' => $suivis,
+            'suivis' => $pagerecette,
         ]);
     }
 
@@ -40,6 +43,7 @@ class SuiviController extends AbstractController
     {
         $suivi = new Suivi();
         $suivi->setDate(new \DateTime());
+        $suivi->setIdutilisateur(1);
         $form = $this->createForm(SuiviType::class, $suivi);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

@@ -199,8 +199,8 @@ class RecetteController extends Controller
             $entityManager->remove($recette);
             $entityManager->flush();
 
-        $sid = 'AC2e3f103543a521c05ddbd7f53f95f5bd';
-        $token = '016ed8adb152e9ae3b807750c42e60b3';
+        $sid = '';
+        $token = '';
         $client = new Client($sid, $token);
 
         // Use the client to do fun stuff like send text messages!
@@ -322,42 +322,43 @@ class RecetteController extends Controller
         $ing = $request->get('ingredient');
         $recette = $request->get('recette');
         $quanite = $request->get('quantite');
+
         if($ing==null && $recette==null && $quanite==null)
         {
-            $ing='no one';
+            return $this->redirectToRoute('ingredientrecette_index');
         }
         if($ing=='on')
         {
-            $ing='ing';
+            $ingredientrecettes=$IRP->triParCritere('idingredient');
         }
         if($recette=='on')
         {
-            $ing='recette';
+            $ingredientrecettes=$IRP->triParCritere('idrecette');
         }
         if($quanite=='on')
         {
-            $ing='qtt';
+            $ingredientrecettes=$IRP->triParCritere('quantite');
         }
         if($ing=='on' && $recette=='on')
         {
-            $ing='ing et recette';
+            $ingredientrecettes=$IRP->triPar2Critere('idingredient','idrecette');
         }
         if($ing=='on' && $quanite=='on')
         {
-            $ing='ing et qtt';
+            $ingredientrecettes=$IRP->triPar2Critere('idingredient','quantite');
         }
         if($quanite=='on' && $recette=='on')
         {
-            $ing='qtt et recette';
+            $ingredientrecettes=$IRP->triPar2Critere('quantite','idrecette');
         }
         if($quanite=='on' && $recette=='on' && $quanite=='on')
         {
-            $ing='all';
+            $ingredientrecettes=$IRP->triPar3Critere('idingredient','idrecette','quantite');
         }
         $type=array();
         $em = $this->getDoctrine()->getManager();
         return $this->render('ingredientrecette/index.html.twig', [
-            'ingredientrecettes' => $type,
+            'ingredientrecettes' => $ingredientrecettes,
             'ing' => $ing,
 
         ]);

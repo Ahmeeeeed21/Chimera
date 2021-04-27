@@ -1,6 +1,6 @@
 {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
 <div>
-<div ">
+<div>
     <label style="display: inline-block">Nom</label>
     <div style="display: inline-block">{{ form_widget(form.nom) }}</div>
     <h6 style="text-align: center;color: red;font-size: medium;font-family: serif;">{{ form_errors(form.nom) }} </h6>
@@ -8,7 +8,7 @@
 
 <div>
     <label style="display: inline-block">Image</label>
-    <div style="display: inline-block;background-color: grey"> {{ form_widget(form.image_File) }}</div>
+    <div style="display: inline-block;border: solid 1px"> {{ form_widget(form.image_File) }}</div>
     <h6 style="text-align: center;color: red;font-size: medium;font-family: serif;">{{ form_errors(form.image_File) }} </h6>
 </div>
 

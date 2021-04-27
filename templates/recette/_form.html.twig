@@ -11,7 +11,7 @@
     <div>
             <label>Image</label>
 
-        <div style="width: 400px"> {{ form_widget(form.image_File) }}</div>
+        <div style="width: 400px;border: solid 1px"> {{ form_widget(form.image_File) }}</div>
 
             <h6 style="text-align: center;color: red;font-size: medium;font-family: serif;">{{ form_errors(form.image_File) }} </h6>
         </div>
@@ -37,6 +37,6 @@
     :is(label){
         display:inline-block;
         margin-right: 15px;
-        width: 140px;
+        width: 200px;
     }
 </style>

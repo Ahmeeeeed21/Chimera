@@ -79,27 +79,43 @@ class IngredientrecetteRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
-
-    /*
-    public function findOneBySomeField($value): ?Ingredientrecette
+    public function triParCritere($critere)
     {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
+        return $this->createQueryBuilder('ir')
+            ->innerjoin('ir.idrecette','r')
+            ->innerjoin('ir.idingredient','i')
+            ->addSelect('r')
+            ->addSelect('i')
+            ->addSelect('ir')
+            ->orderBy('ir.'.$critere,'ASC')
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult()
+            ;
     }
-    */
-
-    public function AfficherRecetteComplete($idr)
+    public function triPar2Critere($critere1,$critere2)
     {
-        return $this->createQueryBuilder('r')
-            ->join('r.id','c')
-            ->addSelect('c')
-            ->where('c.id=:idr')
-            ->setParameters('idr',$idr)
+        return $this->createQueryBuilder('ir')
+            ->innerjoin('ir.idrecette','r')
+            ->innerjoin('ir.idingredient','i')
+            ->addSelect('ir')
+            ->addOrderBy('ir.'.$critere1,'ASC')
+            ->addOrderBy('ir.'.$critere2,'ASC')
             ->getQuery()
-            ->getResult();
+            ->getResult()
+            ;
     }
+    public function triPar3Critere($critere1,$critere2,$critere3)
+    {
+        return $this->createQueryBuilder('ir')
+            ->innerjoin('ir.idrecette','r')
+            ->innerjoin('ir.idingredient','i')
+            ->addSelect('ir')
+            ->addOrderBy('ir.'.$critere1,'ASC')
+            ->addOrderBy('ir.'.$critere2,'ASC')
+            ->addOrderBy('ir.'.$critere3,'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 }

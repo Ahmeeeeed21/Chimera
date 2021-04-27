@@ -17,7 +17,7 @@ class IngredientType extends AbstractType
         $builder
             ->add('nom', TextType::class, ['attr' => ['placeholder' => 'nom', 'class' => 'form-control pname'],])
 
-            ->add('image_File', FileType::class,['attr' =>['placeholder' => 'image','class'=>'jFiler-input-button']])
+            ->add('image_File', FileType::class,['attr' =>['placeholder' => 'Select Image']])
             ->add('calorie')
             ->add('unite',ChoiceType::class,[
                 'choices' => [

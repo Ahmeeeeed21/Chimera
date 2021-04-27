@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Ingredientrecette
@@ -25,6 +26,7 @@ class Ingredientrecette
      * @var float
      *
      * @ORM\Column(name="Quantite", type="float", precision=10, scale=0, nullable=false)
+     * @Assert\NotBlank(message="Quantite is required")
      */
     private $quantite;
 
@@ -35,6 +37,7 @@ class Ingredientrecette
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idRecette", referencedColumnName="idRecette")
      * })
+     * @Assert\NotNull
      */
     private $idrecette;
 
@@ -45,6 +48,7 @@ class Ingredientrecette
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idIngredient", referencedColumnName="id")
      * })
+     * @Assert\NotNull
      */
     private $idingredient;
 

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Suivi
@@ -30,29 +31,37 @@ class Suivi
 
     /**
      * @var float
-     *
+     * @Assert\GreaterThan(40)
+     * @Assert\LessThan(220)
      * @ORM\Column(name="poids", type="float", precision=10, scale=0, nullable=false)
+     * @Assert\NotBlank(message="poids is required")
      */
     private $poids;
 
     /**
      * @var float
-     *
+     * @Assert\GreaterThan(100)
+     * @Assert\LessThan(220)
      * @ORM\Column(name="taille", type="float", precision=10, scale=0, nullable=false)
+     * @Assert\NotBlank(message="taille is required")
      */
     private $taille;
 
     /**
      * @var float
-     *
+     * @Assert\GreaterThan(0)
+     * @Assert\LessThan(7)
      * @ORM\Column(name="heure_activite", type="float", precision=10, scale=0, nullable=false)
+     * @Assert\NotBlank(message="heure d'activite is required")
      */
     private $heureActivite;
 
     /**
      * @var float
-     *
+     * @Assert\GreaterThan(0)
+     * @Assert\LessThan(6)
      * @ORM\Column(name="conso_eau", type="float", precision=10, scale=0, nullable=false)
+     * @Assert\NotBlank(message="consomation d'eau is required")
      */
     private $consoEau;
 

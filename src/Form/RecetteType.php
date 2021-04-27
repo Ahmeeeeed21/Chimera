@@ -31,8 +31,8 @@ class RecetteType extends AbstractType
                     ],
 
                 ],])
-            ->add('image_File',FileType::class,['attr' =>['placeholder' => 'image','class'=>'jFiler-input-button']])
-            ->add('description',TextareaType::class,['attr' => ['placeholder' => 'Description', 'class' => 'form-control pname'],])
+            ->add('image_File',FileType::class,['attr' =>['placeholder' => 'Select Image'],])
+            ->add('description',TextareaType::class,['attr' => ['placeholder' => 'Description'],])
         ;
     }
 

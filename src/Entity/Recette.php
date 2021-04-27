@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Recette
  *
@@ -28,6 +29,7 @@ class Recette
      * @var string
      *
      * @ORM\Column(name="nomRecette", type="string", length=64, nullable=false)
+     * @Assert\NotBlank(message="nom is required")
      *
      */
     private $nomrecette;
@@ -36,6 +38,7 @@ class Recette
      * @var string
      *
      * @ORM\Column(name="typeRecette", type="string", length=32, nullable=false)
+     *  @Assert\Choice({"Entrée", "Dessert", "Amuse bouche","Sauce","Accompagnement","Boisson"},message="Choose a valid type.")
      *
      */
     private $typerecette;
@@ -44,6 +47,8 @@ class Recette
      * @var string
      *
      * @ORM\Column(name="description", type="text", length=65535, nullable=false)
+     * @Assert\NotBlank(message="description is required")
+     * @Assert\Length(min=3)
      *
      */
     private $description;

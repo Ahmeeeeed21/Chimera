@@ -57,9 +57,7 @@
                                         </div>
                                         <div class="blog-detail">
                                             <div class="blog-title">
-                                                <form method="post" action="{{ path('suivi_delete', {'id': suivi.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');" style="display:inline-block">
-                                                    <button class="text-muted" data-toggle="tooltip" data-placement="top" data-original-title="Delete" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;margin-top: 25px"><i class="icofont icofont-delete-alt"></i></button>
-                                                </form>
+
                                                 <br>
                                                 <img src="{{ asset('assets/images/avatar-1.png') }}" style="alignment: left;margin-top: 15px">
                                                <h4 style="text-align: center">Check up</h4>
@@ -107,8 +105,10 @@
 
                                             </div>
                                             <div class="btn-blog" >
-                                                <a class="btn btn-primary"  href="{{ path('suivi_edit', {'id': suivi.id}) }}">Edit</a>
-                                                <a class="btn btn-primary"  href="{{ path('suivi_show', {'id': suivi.id}) }}">Show More</a>
+                                                <a class="btn btn-primary"  href="{{ path('suivi_edit', {'id': suivi.id}) }}"><i class="icofont icofont-ui-edit"></i></a>
+                                                <form method="post" action="{{ path('suivi_delete', {'id': suivi.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');" style="display:inline-block">
+                                                    <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" data-original-title="Delete" ><i class="icofont icofont-delete-alt"></i></button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -116,10 +116,15 @@
 
                             {% endfor %}
                         {% endif %}
+
+
                     </div>
 
                 </div>
 
+            </div>
+            <div class="navigation" style="margin-left: 45%">
+                {{ knp_pagination_render(suivis) }}
             </div>
             <!-- IMC -->
             <div class="yz-widget" data-calculator-type="bmi" data-language="fr" data-unit-system="metric" data-background-color="#EEEEEE" data-text-color="#212121" data-primary-color="#03A9F4" data-alternate-background-color="#FFFFFF" data-alternate-text-color="#FFFFFF" data-secondary-color="#FFC107"><span class="yz-copyright">Powered by <a href="https://www.yazio.com/fr/calcul-imc">YAZIO</a></span></div>
@@ -143,6 +148,8 @@
 </div>
 </div>
 </div>
+
+
     <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
     <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
     <script src="//code.jquery.com/jquery.js"></script>
