@@ -32,14 +32,9 @@ class RecetteController extends Controller
         $recettes = $this->getDoctrine()
             ->getRepository(Recette::class)
             ->findAll();
+
         $pagerecette = $this->get('knp_paginator')->paginate(
-        // Doctrine Query, not results
-            $recettes,
-            // Define the page parameter
-            $request->query->getInt('page', 1),
-            // Items per page
-            6
-        );
+            $recettes, $request->query->getInt('page', 1), 6);
         return $this->render('recette/index.html.twig', [
             'recettes' => $pagerecette,
 
@@ -112,31 +107,29 @@ class RecetteController extends Controller
     /**
      * @Route("/{typerecette}", name="recette_afficher", methods={"GET"})
      */
-    public function afficher(RecetteRepository $rec,Recette $recette)
+    public function afficher(RecetteRepository $rec,Recette $recette,Request $request)
     {
-        dump($recette);
         $recettes = $rec->findRecettebyType($recette->getTyperecette());
-        if (!$recettes) {
-            return $this->render('recette/index.html.twig', ['recettes' => []]);
-        } else {
-            return $this->render('recette/index.html.twig', [
-                'recettes' => $recettes,
-            ]);
+        $pagerecette = $this->get('knp_paginator')->paginate(
+            $recettes, $request->query->getInt('page', 1), 6);
 
-        }
+            return $this->render('recette/index.html.twig', [
+                'recettes' => $pagerecette,
+            ]);
     }
     /**
      * @Route("/front/{typerecette}", name="recette_front_afficher", methods={"GET"})
      */
-    public function afficher_front(RecetteRepository $rec,Recette $recette)
+    public function afficher_front(RecetteRepository $rec,Recette $recette,Request $request)
     {
         dump($recette);
         $recettes = $this->getDoctrine()
             ->getRepository(Recette::class)
             ->findBy(array('etat'=>'Accepter','typerecette'=>$recette->getTyperecette()));
-
+        $pagerecette = $this->get('knp_paginator')->paginate(
+            $recettes, $request->query->getInt('page', 1), 6);
             return $this->render('recette/index_front.html.twig', [
-                'recettes' => $recettes,
+                'recettes' => $pagerecette,
             ]);
 
     }
@@ -150,8 +143,6 @@ class RecetteController extends Controller
         $recette->setEtat("En Attente");
         $form = $this->createForm(RecetteType::class, $recette);
         $form->handleRequest($request);
-
-
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($recette);
@@ -212,7 +203,7 @@ class RecetteController extends Controller
         $token = '016ed8adb152e9ae3b807750c42e60b3';
         $client = new Client($sid, $token);
 
-// Use the client to do fun stuff like send text messages!
+        // Use the client to do fun stuff like send text messages!
         $client->messages->create(
         // the number you'd like to send the message to
             '+21622525030',
@@ -234,8 +225,8 @@ class RecetteController extends Controller
         $message = (new \Swift_Message('SlowLife'))
             ->setFrom('slowlife.testpi@gmail.com', 'SlowLife')
             ->setTo('yassine.benamor@esprit.tn')
-            ->setSubject('')
-            ->setBody("Hello");
+            ->setSubject('Recette Accepter')
+            ->setBody("Bonjour cher coach, votre recette ".$recette->getNomrecette()." a été accepter");
         $mailer->send($message) ;
         return $this->redirectToRoute('recette_back_index');
     }
@@ -248,8 +239,8 @@ class RecetteController extends Controller
         $message = (new \Swift_Message('SlowLife'))
             ->setFrom('slowlife.testpi@gmail.com', 'SlowLife')
             ->setTo('yassine.benamor@esprit.tn')
-            ->setSubject('')
-            ->setBody("Bonjour cher coach, votre recette".$recette->getNomrecette()."a été refuser");
+            ->setSubject('Recette refuser')
+            ->setBody("Bonjour cher coach, votre recette ".$recette->getNomrecette()." a été refuser");
         $mailer->send($message) ;
         return $this->redirectToRoute('recette_back_index');
     }
@@ -285,9 +276,7 @@ class RecetteController extends Controller
             'Relateds' => $Related,
             'Calorie' => $Calorie
         ]);
-
         $filename = $recette->getNomrecette().'pdf';
-
         return new Response(
             $snappy->getOutputFromHtml($html),
             200,
@@ -306,19 +295,73 @@ class RecetteController extends Controller
         $nom = $request->get('search');
         $type = $request->get('search1');
         $search = $rec->search($nom,$type);
-        $pagerecette = $this->get('knp_paginator')->paginate(
-        // Doctrine Query, not results
-            $search,
-            // Define the page parameter
-            $request->query->getInt('page', 1),
-            // Items per page
-            6
-        );
+        $pagerecette = $this->get('knp_paginator')->paginate($search, $request->query->getInt('page', 1), 6);
         return $this->render('recette/index.html.twig', [
             'recettes' => $pagerecette,
         ]);
     }
 
+    /**
+     * @Route("front/r/recherche", name="recherche_front", methods={"GET"})
+     */
+    public function RechercheRecetteFront(Request $request,recetteRepository $rec): Response
+    {
+        $nom = $request->get('search');
+        $type = $request->get('search1');
+        $search = $rec->search($nom,$type);
+        $pagerecette = $this->get('knp_paginator')->paginate($search, $request->query->getInt('page', 1), 6);
+        return $this->render('recette/index_front.html.twig', [
+            'recettes' => $pagerecette,
+        ]);
+    }
+    /**
+     * @Route("/front/r/tri", name="tri")
+     */
+    public function Trier(Request $request,IngredientrecetteRepository $IRP): Response
+    {
+        $ing = $request->get('ingredient');
+        $recette = $request->get('recette');
+        $quanite = $request->get('quantite');
+        if($ing==null && $recette==null && $quanite==null)
+        {
+            $ing='no one';
+        }
+        if($ing=='on')
+        {
+            $ing='ing';
+        }
+        if($recette=='on')
+        {
+            $ing='recette';
+        }
+        if($quanite=='on')
+        {
+            $ing='qtt';
+        }
+        if($ing=='on' && $recette=='on')
+        {
+            $ing='ing et recette';
+        }
+        if($ing=='on' && $quanite=='on')
+        {
+            $ing='ing et qtt';
+        }
+        if($quanite=='on' && $recette=='on')
+        {
+            $ing='qtt et recette';
+        }
+        if($quanite=='on' && $recette=='on' && $quanite=='on')
+        {
+            $ing='all';
+        }
+        $type=array();
+        $em = $this->getDoctrine()->getManager();
+        return $this->render('ingredientrecette/index.html.twig', [
+            'ingredientrecettes' => $type,
+            'ing' => $ing,
+
+        ]);
+    }
 
 
 }

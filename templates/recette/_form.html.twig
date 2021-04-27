@@ -4,21 +4,21 @@
     <div>
             <label>Nom de La recette</label>
 
-        <div>{{ form_widget(form.nomrecette) }}</div>
+        <div style="width: 400px">{{ form_widget(form.nomrecette) }}</div>
 
             <h6 style="text-align: center;color: red;font-size: medium;font-family: serif;">{{ form_errors(form.nomrecette) }} </h6>
         </div>
     <div>
             <label>Image</label>
 
-        <div> {{ form_widget(form.image_File) }}</div>
+        <div style="width: 400px"> {{ form_widget(form.image_File) }}</div>
 
             <h6 style="text-align: center;color: red;font-size: medium;font-family: serif;">{{ form_errors(form.image_File) }} </h6>
         </div>
     <div>
           <label>type de recette</label>
 
-        <div>   {{ form_widget(form.typerecette) }} </div>
+        <div style="width: 400px">   {{ form_widget(form.typerecette) }} </div>
 
             <h6 style="text-align: center;color: red;font-size: medium;font-family: serif;">{{ form_errors(form.typerecette) }} </h6>
         </div>
@@ -26,7 +26,7 @@
     <div>
            <label>Comment preparé la recette</label>
 
-        <div>    {{ form_widget(form.description) }} </div>
+        <div style="width: 400px;">    {{ form_widget(form.description) }} </div>
             <h6 style="text-align: center;color: red;font-size: medium;font-family: serif;">{{ form_errors(form.description) }} </h6>
         </div>
 

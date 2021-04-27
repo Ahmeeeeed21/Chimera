@@ -157,6 +157,9 @@
     "martin-georgiev/social-post-bundle": {
         "version": "v3.1.0"
     },
+    "mercuryseries/flashy-bundle": {
+        "version": "v3.0.2"
+    },
     "monolog/monolog": {
         "version": "1.26.0"
     },

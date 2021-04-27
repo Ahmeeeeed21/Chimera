@@ -57,9 +57,11 @@
                                         </div>
                                         <div class="blog-detail">
                                             <div class="blog-title">
-
-                                                    <img src="{{ asset('assets/images/avatar-1.png') }}" style="alignment: left;margin-top: 15px">
-                                                    <br>
+                                                <form method="post" action="{{ path('suivi_delete', {'id': suivi.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');" style="display:inline-block">
+                                                    <button class="text-muted" data-toggle="tooltip" data-placement="top" data-original-title="Delete" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;margin-top: 25px"><i class="icofont icofont-delete-alt"></i></button>
+                                                </form>
+                                                <br>
+                                                <img src="{{ asset('assets/images/avatar-1.png') }}" style="alignment: left;margin-top: 15px">
                                                <h4 style="text-align: center">Check up</h4>
                                             </div>
                                             <div>
@@ -99,7 +101,6 @@
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-size: medium;
         color: #0c0c0c;
-
     }
 </style>
 
@@ -142,4 +143,8 @@
 </div>
 </div>
 </div>
+    <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+    <script src="//code.jquery.com/jquery.js"></script>
+    {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 {% endblock %}

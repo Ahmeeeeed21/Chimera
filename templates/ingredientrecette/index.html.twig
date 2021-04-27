@@ -44,6 +44,34 @@
                                     <div class="table-responsive">
                                         <div class="table-content">
                                             <div class="project-table">
+                                                <form action="{{ path('tri') }}" method="get">
+                                                    <div class="checkbox-fade fade-in-success">
+                                                        <label>
+                                                            <input type="checkbox" name="ingredient" id="ingredient">
+                                                            <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-success"></i></span> <span>Ingredient</span>
+                                                        </label>
+                                                    </div>
+                                                    <br>
+                                                    <div class="checkbox-fade fade-in-info">
+                                                        <label>
+                                                            <input type="checkbox" name="recette" id="recette" >
+                                                            <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-info"></i></span><span>Recette</span>
+                                                        </label>
+                                                    </div>
+
+                                                    <br>
+                                                    <div class="checkbox-fade fade-in-danger">
+                                                        <label>
+                                                            <input type="checkbox" name="quantite" id="quantite" >
+                                                            <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-danger"></i></span><span>Quanite</span>
+                                                        </label>
+                                                    </div>
+                                                    <br>
+                                                    <button class="btn btn-inverse" data-toggle="tooltip" data-placement="top" title="" data-original-title=".icofont icofont-search-alt-2">
+                                                        <i class="icofont icofont-search-alt-2"></i>
+                                                    </button>
+{{ dump(ing) }}
+                                                </form>
                                                 <table id="e-product-list" class="table table-striped dt-responsive nowrap">
                                                     <thead>
                                                     <tr>
@@ -57,11 +85,9 @@
 
                                                     {% for ingredientrecette in ingredientrecettes %}
                                                         <tr>
-
                                                             <td>{{ ingredientrecette.idingredient }}</td>
                                                             <td>{{ ingredientrecette.idrecette }}</td>
                                                             <td>{{ ingredientrecette.quantite }}</td>
-
                                                             <td class="action-icon">
                                                                 <form method="post" action="{{ path('ingredientrecette_edit', {'id': ingredientrecette.id}) }}" style="display:inline-block">
                                                                     <button class="m-r-15 text-muted" data-toggle="tooltip" data-placement="top" data-original-title="Edit" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;"><i class="icofont icofont-ui-edit"></i></button>
@@ -96,5 +122,4 @@
     </div>
     </div>
 
-    <a href="{{ path('ingredientrecette_new') }}">Create new</a>
 {% endblock %}

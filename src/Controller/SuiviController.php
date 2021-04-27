@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Suivi;
 use App\Entity\Utilisateur;
 use App\Form\SuiviType;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,25 +36,18 @@ class SuiviController extends AbstractController
      * @param $user
      * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request,FlashyNotifier $flashy): Response
     {
         $suivi = new Suivi();
         $suivi->setDate(new \DateTime());
-
-
-
         $form = $this->createForm(SuiviType::class, $suivi);
         $form->handleRequest($request);
-
-
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $suivi->setTaille($suivi->getTaille()/100);
             $entityManager->persist($suivi);
             $entityManager->flush();
-
-
-
+            $flashy->success('Votre Suivi a été ajouté');
             return $this->redirectToRoute('suivi_index');
         }
 
@@ -102,8 +96,6 @@ class SuiviController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($suivi);
             $entityManager->flush();
-
-
         return $this->redirectToRoute('suivi_index');
     }
 }

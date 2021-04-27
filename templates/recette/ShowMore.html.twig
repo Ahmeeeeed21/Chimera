@@ -38,7 +38,7 @@
                                     <div class="blog-single">
 
                                         <group  style="display: inline-flex;margin-top: 50px" >
-                                            <h2 style="margin-left: 375px;font-family: 'Source Sans Pro', sans-serif;color: #187798">{{ recette.nomrecette }}</h2>
+                                            <h3 style="margin-left: 375px;font-family: 'Source Sans Pro', sans-serif;color: #187798">{{ recette.nomrecette }}</h3>
                                             <h4 style="margin-left: 100px;margin-top: 2px;color: #8a1f11">{{ recette.typerecette }}</h4>
                                         </group>
                                         <img src="{{ asset('/images/recette/'~recette.image) }}" alt="image recette" style="width: 600px;height: 300px;margin-left:18%" >
@@ -92,7 +92,6 @@
     .Ingredient:hover{
         zoom: 125%;
         -webkit-text-fill-color: #187798;
-
     }
 </style>
                                 </div>
@@ -125,8 +124,9 @@
                                                 <div class="col-md-4">
                                                     <div class="articles">
                                                         <img src="{{ asset('assets/images/blog/blog-r-1.jpg') }}" class="img-fluid c-pointer" alt="" />
+                                                        <h5>{{ Related.nomrecette }}</h5>
+
                                                         <h6>{{ Related.typerecette }}</h6>
-                                                        <a href="{{ path('show_more', {'idrecette': Related.idrecette}) }}">{{ Related.nomrecette }}</a>
 
                                                         <a  href="{{ path('show_more', {'idrecette': Related.idrecette}) }}" class="btn btn-primary waves-effect waves-light" >Read More.... <span class="m-l-10"> <i class="icofont icofont-rounded-double-right"></i>
 </span></a>

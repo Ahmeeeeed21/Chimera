@@ -32,12 +32,12 @@
 
 
     <div class="page-body">
-        <form role="search" id="nav-search-form" method="get" action="{{ path('recherche') }}">
+        <form role="search" id="nav-search-form" method="get" action="{{ path('recherche_front') }}">
 
             <div class="card-block" style="width: 300px;height:200px;margin-left: 40%;background-color: #f5f5f5;margin-bottom: 20px">
                 <label style="width: 250px;text-align: center;font-size: 20px;font-family: sans-serif;font-weight:bold;color: #393c6d">Rechercher une recette</label>
                 <div class="input-group">
-                    <div class="input-group input-group-button input-group-primary" style="margin-bottom: 1px">
+                    <div class="input-group input-group-button input-group-primary" style="width: 250px;text-align: center;font-size: 20px;font-family: sans-serif;font-weight:bold;color: #393c6d;margin-bottom: 20px">
                         <input class="form-control" type="text" id="search"  name="search" placeholder="Nom de recette" />
                     </div>
                 </div>
@@ -134,9 +134,9 @@
                                             <p class="author"><b>Posted by :</b> <a>Coach Name</a></p>
                                         </div>
                                         <div class="btn-blog">
-
-                                            <a class="btn btn-primary" style="margin-left: 100px" href="{{ path('show_more', {'idrecette': recette.idrecette}) }}">Show More</a>
-
+                                            <form action="{{ path('show_more', {'idrecette': recette.idrecette}) }}" method="get">
+                                            <button class="btn btn-success"><i class="icofont icofont-eye-alt"></i></button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
