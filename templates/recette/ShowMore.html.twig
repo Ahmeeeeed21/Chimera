@@ -76,7 +76,7 @@
                                             {%  set Calorie=Calorie+(Ingredient.quantite/Ingredient.idingredient.unite|split(' ')[0])*Ingredient.idingredient.calorie %}
                                             <tr>
                                             <td>{{ Ingredient.idingredient.nom }}</td>
-                                                <td>{{ Ingredient.quantite }}</td>
+                                                <td>{{ Ingredient.quantite ~ Ingredient.idingredient.unite|split(' ')[1] }}</td>
                                                 <td>{{ Ingredient.idingredient.calorie~'/'~Ingredient.idingredient.unite }}</td>
                                                 <td>{{ (((Ingredient.quantite/Ingredient.idingredient.unite|split(' ')[0])*Ingredient.idingredient.calorie) |round) ~ ' KCal'  }}</td>
                                             </tr>

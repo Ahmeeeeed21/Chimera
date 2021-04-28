@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Ingredientrecette;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\OrderBy;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -74,7 +75,6 @@ class IngredientrecetteRepository extends ServiceEntityRepository
             ->addSelect('r')
             ->addSelect('i')
             ->addSelect('ir')
-            ->orderBy('ir.idrecette','ASC')
             ->getQuery()
             ->getResult()
             ;
@@ -87,35 +87,21 @@ class IngredientrecetteRepository extends ServiceEntityRepository
             ->addSelect('r')
             ->addSelect('i')
             ->addSelect('ir')
-            ->orderBy('ir.'.$critere,'ASC')
+            ->orderBy($critere,'ASC')
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
-    public function triPar2Critere($critere1,$critere2)
+    public function triPar2Critere()
     {
         return $this->createQueryBuilder('ir')
             ->innerjoin('ir.idrecette','r')
             ->innerjoin('ir.idingredient','i')
             ->addSelect('ir')
-            ->addOrderBy('ir.'.$critere1,'ASC')
-            ->addOrderBy('ir.'.$critere2,'ASC')
+            ->addOrderBy('r.nomrecette', 'ASC')
+            ->addOrderBy('i.nom', 'ASC')
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
-    public function triPar3Critere($critere1,$critere2,$critere3)
-    {
-        return $this->createQueryBuilder('ir')
-            ->innerjoin('ir.idrecette','r')
-            ->innerjoin('ir.idingredient','i')
-            ->addSelect('ir')
-            ->addOrderBy('ir.'.$critere1,'ASC')
-            ->addOrderBy('ir.'.$critere2,'ASC')
-            ->addOrderBy('ir.'.$critere3,'ASC')
-            ->getQuery()
-            ->getResult()
-            ;
-    }
+
 
 }

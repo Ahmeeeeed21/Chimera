@@ -29,7 +29,7 @@ class Ingredient
      *
      * @ORM\Column(name="nom", type="string", length=255, nullable=false)
      * @Assert\NotBlank(message="nom is required")
-     * @Assert\Length(min=5)
+     * @Assert\Length(min=3)
      */
     private $nom;
 
@@ -56,7 +56,7 @@ class Ingredient
 
     /**
      * @var int
-     * @Assert\GreaterThan(20)
+     * @Assert\GreaterThan(-1,message="les calories doit être positifs")
      * @Assert\LessThan(1000)
      * @Assert\NotBlank(message="Calorie is required")
      * @ORM\Column(name="calorie", type="integer", nullable=false)

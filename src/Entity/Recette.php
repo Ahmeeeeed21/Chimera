@@ -38,7 +38,7 @@ class Recette
      * @var string
      *
      * @ORM\Column(name="typeRecette", type="string", length=32, nullable=false)
-     *  @Assert\Choice({"Entrée", "Dessert", "Amuse bouche","Sauce","Accompagnement","Boisson"},message="Choose a valid type.")
+     *  @Assert\Choice({"Entrée","Plat", "Dessert", "Amuse bouche","Sauce","Accompagnement","Boisson"},message="Choose a valid type.")
      *
      */
     private $typerecette;
