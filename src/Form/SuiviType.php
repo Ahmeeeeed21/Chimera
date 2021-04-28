@@ -19,8 +19,12 @@ class SuiviType extends AbstractType
             ->add('consoEau')
             ->add('captcha', CaptchaType::class, array(
                 'width' => 200,
-                'height' => 50,
+                'height' => 70,
                 'length' => 6,
+                'quality'=>240,
+                'reload'=> true,
+                'as_url'=>true,
+
             ));
         ;
     }

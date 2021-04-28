@@ -31,7 +31,7 @@ class RecetteController extends Controller
     {
         $recettes = $this->getDoctrine()
             ->getRepository(Recette::class)
-            ->findAll();
+            ->findby(array('idcoach'=>1));
 
         $pagerecette = $this->get('knp_paginator')->paginate(
             $recettes, $request->query->getInt('page', 1), 6);
@@ -48,14 +48,7 @@ class RecetteController extends Controller
         $recettes = $this->getDoctrine()
             ->getRepository(Recette::class)
             ->findBy(array('etat'=>'Accepter'));
-        $pagerecette = $this->get('knp_paginator')->paginate(
-        // Doctrine Query, not results
-            $recettes,
-            // Define the page parameter
-            $request->query->getInt('page', 1),
-            // Items per page
-            6
-        );
+        $pagerecette = $this->get('knp_paginator')->paginate($recettes, $request->query->getInt('page', 1), 6);
         return $this->render('recette/index_front.html.twig', [
             'recettes' => $pagerecette,
         ]);
@@ -200,7 +193,7 @@ class RecetteController extends Controller
             $entityManager->flush();
 
         $sid = 'AC2e3f103543a521c05ddbd7f53f95f5bd';
-        $token = '';
+        $token = '19bef0458f6742f732df0332ec958002';
         $client = new Client($sid, $token);
 
         // Use the client to do fun stuff like send text messages!
@@ -294,7 +287,7 @@ class RecetteController extends Controller
     {
         $nom = $request->get('search');
         $type = $request->get('search1');
-        $search = $rec->search($nom,$type);
+        $search = $rec->search($nom,$type,1);
         $pagerecette = $this->get('knp_paginator')->paginate($search, $request->query->getInt('page', 1), 6);
         return $this->render('recette/index.html.twig', [
             'recettes' => $pagerecette,
@@ -339,8 +332,6 @@ class RecetteController extends Controller
         {
             $ingredientrecettes=$IRP->triPar2Critere();
         }
-
-
         return $this->render('ingredientrecette/index.html.twig', [
             'ingredientrecettes' => $ingredientrecettes,
         ]);

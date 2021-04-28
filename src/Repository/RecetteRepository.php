@@ -38,13 +38,15 @@ class RecetteRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-    public function search($name,$type)
+    public function search($name,$type,$id)
     {
         return $this->createQueryBuilder('r')
             ->where('r.nomrecette LIKE :val')
             ->setParameter('val', $name.'%')
             ->Andwhere('r.typerecette LIKE :type')
             ->setParameter('type', $type.'%')
+            ->Andwhere('r.idcoach = :id')
+            ->setParameter('id', $id)
             ->getQuery()
             ->getResult();
     }
