@@ -200,7 +200,7 @@ class RecetteController extends Controller
             $entityManager->flush();
 
         $sid = 'AC2e3f103543a521c05ddbd7f53f95f5bd';
-        $token = '19bef0458f6742f732df0332ec958002';
+        $token = '';
         $client = new Client($sid, $token);
 
         // Use the client to do fun stuff like send text messages!
